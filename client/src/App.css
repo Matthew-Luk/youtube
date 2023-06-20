@@ -1,0 +1,22 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.home {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: 40px, 1fr;
+  width: 98%;
+  color: white;
+  margin: auto;
+  padding-top: 70px;
+}
+
+.sv-home {
+  width: 98%;
+  color: white;
+  margin: auto;
+  padding-top: 80px;
+}

@@ -1,0 +1,118 @@
+.sv-main {
+    width: 98%;
+    overflow: hidden;
+    margin: auto;
+}
+
+.sv-container {
+    width: 950px;
+}
+
+.sv-video {
+    width: 100%;
+    height: 534px;
+}
+
+.sv-video-description {
+    display: flex;
+    flex-direction: column;
+    margin-top: 12px;
+}
+
+.sv-title {
+    font-size: 17.5px;
+    font-weight: 700;
+    text-decoration: none;
+    color: black;
+}
+
+.video-description-bottom {
+    margin-top: 12px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.description-bottom-left {
+    display: flex;
+}
+
+.description-bottom-right {
+    display: flex;
+    gap: 20px;
+}
+
+.description-bottom-right button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 36px;
+    border-radius: 25px;
+    border: none;
+}
+
+.description-bottom-right button p {
+    margin-left: 6px;
+    font-weight: 700;
+}
+
+.sv-channel {
+    display: flex;
+}
+
+.sv-channel a {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.sv-channel-icon {
+    border-radius: 25px;
+    height: 40px;
+    margin-right: 12px;
+}
+
+.sv-channel a:link, .sv-channel a:visited {
+    color: #0f0f0f;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.sv-channel a:hover, .sv-channel a:active {
+    color: #0f0f0f;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.sub {
+    width: 95px;
+    height: 36px;
+    border: none;
+    border-radius: 25px;
+    background-color: #0f0f0f;
+    color: #fbfbfb;
+    margin-left: 30px;
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    cursor: pointer;
+}
+
+.sub:hover {
+    background-color: #272727;
+    cursor: pointer;
+}
+
+.like {
+    width: 100px;
+}
+
+.share {
+    width: 92px;
+}
+
+.download {
+    width: 118px;
+}
+
+.options {
+    width: 35px;
+}
