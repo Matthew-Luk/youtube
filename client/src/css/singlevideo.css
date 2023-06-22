@@ -2,10 +2,17 @@
     width: 98%;
     overflow: hidden;
     margin: auto;
+    display: flex;
+    gap: 24px;
 }
 
-.sv-container {
-    width: 950px;
+.sv-container-left {
+    flex: 2.85;
+}
+
+.sv-container-right {
+    height: 100%;
+    flex: 1.15;
 }
 
 .sv-video {
@@ -13,7 +20,7 @@
     height: 534px;
 }
 
-.sv-video-description {
+.sv-video-header {
     display: flex;
     flex-direction: column;
     margin-top: 12px;
@@ -26,31 +33,34 @@
     color: black;
 }
 
-.video-description-bottom {
+.video-header-bottom {
     margin-top: 12px;
     display: flex;
     justify-content: space-between;
 }
 
-.description-bottom-left {
+.header-bottom-left {
     display: flex;
 }
 
-.description-bottom-right {
+.header-bottom-right {
     display: flex;
-    gap: 20px;
+    gap: 8px;
 }
 
-.description-bottom-right button {
+.header-bottom-right button {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 36px;
-    border-radius: 25px;
     border: none;
 }
 
-.description-bottom-right button p {
+.header-bottom-right button:hover {
+    background-color: #e5e5e5;
+}
+
+.header-bottom-right button p {
     margin-left: 6px;
     font-weight: 700;
 }
@@ -102,17 +112,67 @@
 }
 
 .like {
-    width: 100px;
+    display: flex;
+}
+
+.like-left {
+    width: 70px;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+}
+
+.like-right {
+    width: 40px;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    padding-right: 6px;
 }
 
 .share {
     width: 92px;
+    border-radius: 25px;
 }
 
 .download {
     width: 118px;
+    border-radius: 25px;
 }
 
 .options {
     width: 35px;
+    border-radius: 25px;
+}
+
+.sv-video-description {
+    height: 84px;
+    width: 100%;
+    background-color: #e5e5e5;
+    border-radius: 10px;
+    margin-top: 12px;
+}
+
+.ad { 
+    height: 147px;
+    width: 100%;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+}
+
+.ad-top {
+    height: 45%;
+}
+
+.ad-bottom {
+    border-top: 1px solid #e5e5e5;
+    height: 55%;
+}
+
+.text {
+    color: black;
+}
+
+.description {
+    color: black;
 }

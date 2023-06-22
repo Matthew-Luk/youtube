@@ -22,7 +22,7 @@ import Video10 from './Video10'
 
 
 const Main = (props) => {
-    const {channelId, setChannelId} = props
+    const {channelId, setChannelId, videoId, setVideoId} = props
 
     return (
         <div className='main'>
@@ -68,7 +68,7 @@ const Main = (props) => {
                 </button>
             </div>
             <div className='videos'>
-                <Video10 channelId={channelId} setChannelId={setChannelId}/>
+                <Video10 channelId={channelId} setChannelId={setChannelId} videoId={videoId} setVideoId={setVideoId}/>
             </div>
         </div>
     )

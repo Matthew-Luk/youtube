@@ -10,7 +10,7 @@ const Video10 = (props) => {
     const [video1, setVideo1] = useState("")
     const [video1Title, setVideo1Title] = useState("")
     const [video1Channel, setVideo1Channel] = useState("")
-    const {channelId, setChannelId} = props
+    const {channelId, setChannelId, videoId, setVideoId} = props
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -32,7 +32,7 @@ const Video10 = (props) => {
     const clickHandler = (e) => {
         e.preventDefault()
         setChannelId("UCzQUP1qoWDoEbmsQxvdjxgQ")
-        console.log(video1)
+        setVideoId(video1)
         navigate("/video")
     }
 

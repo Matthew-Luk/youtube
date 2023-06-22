@@ -12,14 +12,15 @@ import { RiShareForwardLine } from "react-icons/ri";
 import { BsDownload } from "react-icons/bs";
 import { AiOutlineEllipsis } from "react-icons/ai";
 
-
-
 const SingleVideo = (props) => {
     const [video, setVideo] = useState("")
     const [videoTitle, setVideoTitle] = useState("")
     const [videoChannel, setVideoChannel] = useState("")
-    const {channelId} = props
-    console.log(channelId)
+    const [viewCount, setViewCount] = useState("")
+    const [likeCount, setLikeCount] = useState("")
+    const [commentCount, setCommentCount] = useState("")
+    const [description, setDescription] = useState("")
+    const {channelId, videoId} = props
 
     // multiple urls in one axios request
     /*let urls = [
@@ -41,31 +42,36 @@ const SingleVideo = (props) => {
         })
     },[])*/
 
-    /*useEffect(() => {
-        axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=1&order=date&key=AIzaSyDUTRDsWBWMeamCR3lfll4dYnaIrW6JTjs`)
+    // video - getting most recent video by channel ID
+    useEffect(() => {
+        axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UC1bwliGvJogr7cWK0nT2Eag&maxResults=1&order=date&key=AIzaSyDUTRDsWBWMeamCR3lfll4dYnaIrW6JTjs`)
         .then((result) => {
             var video = result.data.items[0]
             setVideo(video.id.videoId)
             setVideoTitle(video.snippet.title)
             setVideoChannel(video.snippet.channelTitle)
+            setDescription(video.snippet.description)
         })
         .catch((err) => {
             console.log(err)
         })
-    },[])*/
+    },[])
 
-    /*useEffect(() => {
-        axios.get(`https://youtube.googleapis.com/youtube/v3/videos?part=statistics&id=${video}&key=AIzaSyDUTRDsWBWMeamCR3lfll4dYnaIrW6JTjs`)
+    // viewcount and statistics
+    useEffect(() => {
+        axios.get(`https://youtube.googleapis.com/youtube/v3/videos?part=statistics&id=${videoId}&key=AIzaSyDUTRDsWBWMeamCR3lfll4dYnaIrW6JTjs`)
         .then((result) => {
-            console.log(result)
-            console.log(result.data.items.statistics.viewCount)
+            var stats = result.data.items[0].statistics
+            setViewCount(stats.viewCount)
+            setLikeCount(stats.likeCount)
+            setCommentCount(stats.commentCount)
         })
         .catch((err) => {
             console.log(err)
         })
-    },[])*/
+    },[])
 
-    const url1 = `https://www.youtube.com/embed/${video}`
+    const url1 = `https://www.youtube.com/embed/${videoId}`
     const url2 = `https://www.youtube.com/watch?v=${channelId}`
     const url3 = "https://www.youtube.com/embed/dSXcsKiWvXE"
 
@@ -73,37 +79,41 @@ const SingleVideo = (props) => {
         <div className='sv-home'>
             <Navbar/>
             <div className='sv-main'>
-                <div className='sv-container'>
+                <div className='sv-container-left'>
                     <iframe className='sv-video'
                     src = {url3}
                     title="YouTube video player" frameBorder="0" 
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                     allowFullScreen></iframe>
-                    <div className='sv-video-description'>
-                        <div className='video-description-top'>
+                    <div className='sv-video-header'>
+                        <div className='video-header-top'>
                             <p className='sv-title' href={url2}>{videoTitle}Robert Kennedy, Jr. on His Uncle JFK and the Military Industrial Complex</p>
                         </div>
-                        <div className='video-description-bottom'>
-                            <div className='description-bottom-left'>
+                        <div className='video-header-bottom'>
+                            <div className='header-bottom-left'>
                                 <img src={jre} className='sv-channel-icon'></img>
                                 <div className='sv-channel'>
-                                    <a href='https://www.youtube.com/channel/UCzQUP1qoWDoEbmsQxvdjxgQ'>{videoChannel}PowerfulJRE</a>
+                                    <a href={url2}>{videoChannel}PowerfulJRE</a>
                                     <IconContext.Provider value={{ className: "checkmark"}}>
                                         <BsFillCheckCircleFill />
                                     </IconContext.Provider>
                                 </div>
                                 <button className='sub'>Subscribe</button>
                             </div>
-                            <div className='description-bottom-right'>
-                                <button className='like'>
-                                    <IconContext.Provider value={{ className: "sv-icon"}}>
-                                        <FiThumbsUp />
-                                    </IconContext.Provider>
-                                    <p>43K |</p>
-                                    <IconContext.Provider value={{ className: "sv-icon"}}>
-                                        <FiThumbsDown />
-                                    </IconContext.Provider>
-                                </button>
+                            <div className='header-bottom-right'>
+                                <div className='like'>
+                                    <button className='like-left'>
+                                        <IconContext.Provider value={{ className: "sv-icon"}}>
+                                            <FiThumbsUp />
+                                        </IconContext.Provider>
+                                        <p>43K</p>
+                                    </button>
+                                    <button className='like-right'>
+                                        <IconContext.Provider value={{ className: "sv-icon"}}>
+                                            <FiThumbsDown />
+                                        </IconContext.Provider>
+                                    </button>
+                                </div>
                                 <button className='share'>
                                     <IconContext.Provider value={{ className: "sv-icon"}}>
                                         <RiShareForwardLine />
@@ -122,6 +132,27 @@ const SingleVideo = (props) => {
                                     </IconContext.Provider>
                                 </button>
                             </div>
+                        </div>
+                    </div>
+                    <div className='sv-video-description'>
+                        <div>
+                            <p className='view-count'>{viewCount}</p>
+                        </div>
+                        <div>
+                            <p className='description'>{description}</p>
+                        </div>
+                    </div>
+                    <div className='comment-section'>
+
+                    </div>
+                </div>
+                <div className='sv-container-right'>
+                    <div className='ad'>
+                        <div className='ad-top'>
+                        </div>
+                        <div className='ad-bottom'>
+                            <p className='text'>{videoId}</p>
+                            <p className='text'>{channelId}</p>
                         </div>
                     </div>
                 </div>
