@@ -1,9 +1,11 @@
+/* General CSS for the page */
 .sv-main {
     width: 98%;
     overflow: hidden;
     margin: auto;
     display: flex;
     gap: 24px;
+    color: black;
 }
 
 .sv-container-left {
@@ -15,11 +17,13 @@
     flex: 1.15;
 }
 
+/* Video */
 .sv-video {
     width: 100%;
     height: 534px;
 }
 
+/* Video Header */
 .sv-video-header {
     display: flex;
     flex-direction: column;
@@ -143,6 +147,7 @@
     border-radius: 25px;
 }
 
+/* Video Description */
 .sv-video-description {
     height: 84px;
     width: 100%;
@@ -151,8 +156,9 @@
     margin-top: 12px;
 }
 
+/* Advertisement */
 .ad { 
-    height: 147px;
+    height: 160px;
     width: 100%;
     border: 1px solid #e5e5e5;
     border-radius: 12px;
@@ -161,18 +167,62 @@
 }
 
 .ad-top {
-    height: 45%;
+    height: 50%;
+}
+
+.ad-top img {
+    width: 100%;
+    overflow: hidden;
+    height: 100%;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
 }
 
 .ad-bottom {
     border-top: 1px solid #e5e5e5;
-    height: 55%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding-left: 12px;
 }
 
-.text {
-    color: black;
+.get-tickets {
+    font-size: 16px;
 }
 
-.description {
-    color: black;
+.ad-bottom-middle {
+    width: 60%;
+    height: 40px;
+    font-size: 11px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 12px;
+}
+
+.vividseats-icon {
+    height: 48px;
+    border-radius: 25px;
+}
+
+.buybutton {
+    border: none;
+    height: 36px;
+    width: 85px;
+    border-radius: 25px;
+    margin-right: 12px;
+    background-color: #065fd4;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.buybutton:hover {
+    background-color: #0456bf;
+}
+
+.buybutton a:hover, .buybutton a:active, .buybutton a:link, .buybutton a:visited {
+    text-decoration: none;
+    color: white;
 }

@@ -3,7 +3,10 @@ import Navbar from './Navbar';
 import React, {useEffect, useState} from 'react'
 import '../css/singlevideo.css'
 import axios from 'axios'
+import {encode} from 'html-entities';
 import jre from '../images/jre.jpg'
+import vividseats from '../images/vividseats.png'
+import vividseatsicon from '../images/vividseatsicon.png'
 import { IconContext } from 'react-icons/lib';
 import { BsFillCheckCircleFill } from "react-icons/bs";
 import { FiThumbsUp } from "react-icons/fi";
@@ -26,6 +29,7 @@ const SingleVideo = (props) => {
     /*let urls = [
         `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=1&order=date&key=AIzaSyDUTRDsWBWMeamCR3lfll4dYnaIrW6JTjs`,
         `https://youtube.googleapis.com/youtube/v3/videos?part=statistics&id=${video}&key=AIzaSyDUTRDsWBWMeamCR3lfll4dYnaIrW6JTjs`
+        Popular Music = "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2Cstatistics&chart=mostPopular&maxResults=9&regionCode=US&videoCategoryId=10&key=AIzaSyDUTRDsWBWMeamCR3lfll4dYnaIrW6JTjs"
     ]
     const requests = urls.map((url) => axios.get(url))
     useEffect(() => {
@@ -44,7 +48,7 @@ const SingleVideo = (props) => {
 
     // video - getting most recent video by channel ID
     useEffect(() => {
-        axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UC1bwliGvJogr7cWK0nT2Eag&maxResults=1&order=date&key=AIzaSyDUTRDsWBWMeamCR3lfll4dYnaIrW6JTjs`)
+        axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=1&order=date&key=AIzaSyDUTRDsWBWMeamCR3lfll4dYnaIrW6JTjs`)
         .then((result) => {
             var video = result.data.items[0]
             setVideo(video.id.videoId)
@@ -71,9 +75,9 @@ const SingleVideo = (props) => {
         })
     },[])
 
-    const url1 = `https://www.youtube.com/embed/${videoId}`
+    const url1 = `https://www.youtube.com/embed/${video}`
     const url2 = `https://www.youtube.com/watch?v=${channelId}`
-    const url3 = "https://www.youtube.com/embed/dSXcsKiWvXE"
+    const url3 = "https://www.youtube.com/embed/bUubdmHsFcQ"
 
     return (
         <div className='sv-home'>
@@ -106,7 +110,7 @@ const SingleVideo = (props) => {
                                         <IconContext.Provider value={{ className: "sv-icon"}}>
                                             <FiThumbsUp />
                                         </IconContext.Provider>
-                                        <p>43K</p>
+                                        <p>{likeCount}</p>
                                     </button>
                                     <button className='like-right'>
                                         <IconContext.Provider value={{ className: "sv-icon"}}>
@@ -136,7 +140,7 @@ const SingleVideo = (props) => {
                     </div>
                     <div className='sv-video-description'>
                         <div>
-                            <p className='view-count'>{viewCount}</p>
+                            <p className='view-count'>{viewCount} views</p>
                         </div>
                         <div>
                             <p className='description'>{description}</p>
@@ -149,10 +153,17 @@ const SingleVideo = (props) => {
                 <div className='sv-container-right'>
                     <div className='ad'>
                         <div className='ad-top'>
+                            <img src={vividseats}></img>
                         </div>
                         <div className='ad-bottom'>
-                            <p className='text'>{videoId}</p>
-                            <p className='text'>{channelId}</p>
+                            <img className='vividseats-icon' src={vividseatsicon}></img>
+                            <div className='ad-bottom-middle'>
+                                <p className='get-tickets'>Get Tickets</p>
+                                <p><strong>Ad</strong> vividseats.com/Get-Tickets/Get-Re</p>
+                            </div>
+                            <button className='buybutton'>
+                                <a href='https://www.vividseats.com/'>Buy now</a>
+                            </button>
                         </div>
                     </div>
                 </div>
