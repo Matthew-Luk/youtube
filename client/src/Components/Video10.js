@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import { useNavigate } from "react-router-dom";
-import '../css/video.css'
 import axios from 'axios'
+import '../css/video.css'
 import jre from '../images/jre.jpg'
 import { IconContext } from 'react-icons/lib';
 import { BsFillCheckCircleFill } from "react-icons/bs";
