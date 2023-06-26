@@ -1,3 +1,6 @@
+import React from 'react'
+import '../css/sidebar.css'
+import { useNavigate } from "react-router-dom";
 import { IconContext } from 'react-icons/lib';
 import { HiHome } from "react-icons/hi";
 import { MdSubscriptions } from "react-icons/md";
@@ -17,14 +20,22 @@ import { AiOutlineSetting } from "react-icons/ai";
 import { CiFlag1 } from "react-icons/ci";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { BsPatchExclamation } from "react-icons/bs";
-import React from 'react'
-import '../css/sidebar.css'
 
 const Sidebar = () => {
+    const navigate = useNavigate()
+
+    const musicHandler = (e) => {
+        navigate('/music')
+    }
+
+    const homeHandler = (e) => {
+        navigate("/home")
+    }
+
     return (
         <div className='sidebar'>
             <div className='sidebar-container'>
-                <button className='element selected'>
+                <button onClick={homeHandler} className={document.URL.includes("home")? "element selected": "element"}>
                     <IconContext.Provider value={{className: "icon"}}>
                         <HiHome />
                     </IconContext.Provider>
@@ -71,7 +82,7 @@ const Sidebar = () => {
                     </IconContext.Provider>
                     <p className='element-text'>Shopping</p>
                 </button>
-                <button className='element'>
+                <button onClick={musicHandler} className={document.URL.includes("music")? "element selected": "element"}>
                     <IconContext.Provider value={{className: "icon"}}>
                         <RiMusicLine />
                     </IconContext.Provider>
@@ -168,7 +179,7 @@ const Sidebar = () => {
                     <a href='https://tv.youtube.com/learn/nflsundayticket/'>NFL Sunday Ticket</a>
                 </div>
                 <div className='trademark'>
-                    <p>© 2023 Google LLC x Matthew Luk</p>
+                    <a href='https://github.com/Matthew-Luk/youtube'>© 2023 Google LLC x Matthew Luk</a>
                 </div>
             </div>
         </div>

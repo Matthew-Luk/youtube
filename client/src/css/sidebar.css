@@ -88,8 +88,18 @@
 
 .trademark {
     font-size: 11px;
-    color: #919191;
     letter-spacing: -0.5px;
+    background-color: #fff;
+}
+
+.trademark a:hover, .trademark a:active{
+    text-decoration: none;
+    color: #919191;
+}
+
+.trademark a:visited, .trademark a:link{
+    text-decoration: none;
+    color: #919191;
 }
 
 @media(max-width: 935px) {

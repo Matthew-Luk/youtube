@@ -29,10 +29,11 @@ const Video6 = () => {
     return (
         <div className='container'>
             <iframe className='video'
-            src = {url1}
-            title="YouTube video player" frameBorder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowFullScreen></iframe>
+                src = {url1}
+                title="YouTube video player" frameBorder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowFullScreen>
+            </iframe>
             <div className='video-description'>
                 <div className='video-description-left'>
                     <img src={jeff} className='channel-icon'></img>

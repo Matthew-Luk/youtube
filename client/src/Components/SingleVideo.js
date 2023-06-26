@@ -28,12 +28,14 @@ const SingleVideo = (props) => {
     const [description, setDescription] = useState("")
     const [commentsList, setCommentsList] = useState([])
     const {channelId, videoId} = props
+    const key = "AIzaSyDUTRDsWBWMeamCR3lfll4dYnaIrW6JTjs"
+
 
     // multiple urls in one axios request
     /*let urls = [
-        `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=1&order=date&key=AIzaSyDUTRDsWBWMeamCR3lfll4dYnaIrW6JTjs`,
-        `https://youtube.googleapis.com/youtube/v3/videos?part=statistics&id=${video}&key=AIzaSyDUTRDsWBWMeamCR3lfll4dYnaIrW6JTjs`
-        Popular Music = "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2Cstatistics&chart=mostPopular&maxResults=9&regionCode=US&videoCategoryId=10&key=AIzaSyDUTRDsWBWMeamCR3lfll4dYnaIrW6JTjs"
+        `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=1&order=date&key=${key}`,
+        `https://youtube.googleapis.com/youtube/v3/videos?part=statistics&id=${video}&key=${key}`
+        Popular Music = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2Cstatistics&chart=mostPopular&maxResults=9&regionCode=US&videoCategoryId=10&key=${key}`
     ]
     const requests = urls.map((url) => axios.get(url))
     useEffect(() => {
@@ -52,14 +54,14 @@ const SingleVideo = (props) => {
 
     // video - getting most recent video by channel ID
     /*useEffect(() => {
-        axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=1&order=date&key=AIzaSyDUTRDsWBWMeamCR3lfll4dYnaIrW6JTjs`)
+        axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=1&order=date&key=${key}`)
         .then((result) => {
             var video = result.data.items[0]
             setVideo(video.id.videoId)
             setVideoTitle(video.snippet.title)
             setVideoChannel(video.snippet.channelTitle)
             setDescription(video.snippet.description)
-            setPublishedAt(convertDate(video.snippet.publishedAt))
+            setPublishedAt(convertDate1(video.snippet.publishedAt))
         })
         .catch((err) => {
             console.log(err)
@@ -68,7 +70,7 @@ const SingleVideo = (props) => {
 
     // viewcount and statistics
     /*useEffect(() => {
-        axios.get(`https://youtube.googleapis.com/youtube/v3/videos?part=statistics&id=${videoId}&key=AIzaSyDUTRDsWBWMeamCR3lfll4dYnaIrW6JTjs`)
+        axios.get(`https://youtube.googleapis.com/youtube/v3/videos?part=statistics&id=${videoId}&key=${key}`)
         .then((result) => {
             var stats = result.data.items[0].statistics
             setViewCount(convertCount(stats.viewCount))
@@ -80,9 +82,9 @@ const SingleVideo = (props) => {
         })
     },[])*/
 
-    // comments for the video should list 100
+    // comments for the video should list 5
     /*useEffect(() => {
-        axios.get(`https://www.googleapis.com/youtube/v3/commentThreads?key=AIzaSyDUTRDsWBWMeamCR3lfll4dYnaIrW6JTjs&textFormat=plainText&part=snippet&videoId=${videoId}&maxResults=50`)
+        axios.get(`https://www.googleapis.com/youtube/v3/commentThreads?key=${key}&textFormat=plainText&part=snippet&videoId=${videoId}&maxResults=5`)
         .then((result) => {
             var comments = result.data.items
             setCommentsList(comments)
@@ -94,7 +96,7 @@ const SingleVideo = (props) => {
 
     // subscriber count
     /*useEffect(() => {
-        axios.get(`https://youtube.googleapis.com/youtube/v3/channels?part=statistics&id=${channelId}&key=AIzaSyDUTRDsWBWMeamCR3lfll4dYnaIrW6JTjs`)
+        axios.get(`https://youtube.googleapis.com/youtube/v3/channels?part=statistics&id=${channelId}&key=${key}`)
         .then((result) => {
             setSubCount(convertCount(result.data.items[0].statistics.subscriberCount))
         })
@@ -103,6 +105,12 @@ const SingleVideo = (props) => {
         })
     },[])*/
 
+    // embed video - source video
+    const url1 = `https://www.youtube-nocookie.com/embed/${video}`
+    // link to channel
+    const url2 = `https://www.youtube.com/channel/${channelId}`
+    // link to actual video on youtube.com
+    const url3 = `https://www.youtube-nocookie.com/watch?v=${video}`
 
     function convertCount(num){
         if(num == 0){
@@ -124,7 +132,7 @@ const SingleVideo = (props) => {
         }
     }
 
-    function convertDate(date){
+    function convertDate1(date){
         var map = {
             "01": "Jan",
             "02": "Feb",
@@ -145,12 +153,85 @@ const SingleVideo = (props) => {
         return(month + " " + day + ", " + year)
     }
 
-    // embed video - source video
-    const url1 = `https://www.youtube-nocookie.com/embed/${video}`
-    // link to channel
-    const url2 = `https://www.youtube.com/channel/${channelId}`
-    // link to actual video on youtube.com
-    const url3 = `https://www.youtube-nocookie.com/watch?v=${video}`
+    function convertDate2(publishedDate){
+        var currentDate = new Date()
+        if(currentDate.getMonth() <= 9){
+            currentDate = "".concat("0",currentDate.toLocaleString("en-US", {timeZone: "America/Los_Angeles"}))
+        }else{
+            currentDate = currentDate.toLocaleString("en-US", {timeZone: "America/Los_Angeles"})
+        }
+        var [currentHour, currentDay, currentMonth, currentYear] = [Number(currentDate.slice(12,14)), Number(currentDate.slice(3,5)), Number(currentDate.slice(0,2)), Number(currentDate.slice(6,10))]
+        var [publishedHour, publishedDay, publishedMonth, publishedYear] = [Number(publishedDate.slice(11,13)), Number(publishedDate.slice(8,10)), Number(publishedDate.slice(5,7)), Number(publishedDate.slice(0,4))]
+        if(currentDate.endsWith("AM")){
+            currentHour -= 12
+        }else{
+            currentHour += 12
+        }
+        var difference = {
+            "year":0,
+            "month":0,
+            "day":0,
+            "hour":0
+        }
+        if(currentYear - publishedYear == 1){
+            if(publishedMonth > currentMonth){
+                difference["year"] = 0
+            }else{
+                difference["year"] = 1
+            }
+        }else{
+            difference["year"] = currentYear - publishedYear
+        }
+        if(difference["year"] == 0){
+            if(publishedMonth > currentMonth){
+                difference["month"] = (12 - publishedMonth) + currentMonth
+            }else{
+                difference["month"] = currentMonth - publishedMonth
+            }
+        }
+        if(difference["month"] == 0){
+            difference["day"] = currentDay - publishedDay
+        }else if(difference["month"] == 1){
+            if(publishedDay > currentDay){
+                difference["month"] = 0
+                difference["day"] = (31 - publishedDay) + currentDay
+            }
+        }else{
+            difference["day"] = (31 - publishedDay) + currentDay
+        }
+        if(difference["day"] == 0){
+            difference["hour"] = currentHour - publishedHour
+        }else if(difference["day"] >= 1){
+            if(publishedHour > currentHour){
+                difference["day"] -= 1
+                difference["hour"] = (24 - publishedHour) + currentHour
+            }
+        }
+        for (const [key, value] of Object.entries(difference)) {
+            if(value > 0){
+                if(key == "day"){
+                    if(value == 1){
+                        return "1 day ago"
+                    }else if(value <= 7){
+                        return `${value} days ago`
+                    }else{
+                        var weeks = Math.round(value / 7)
+                        if(weeks == 1){
+                            return "1 week ago"
+                        }else{
+                            return `${weeks} weeks ago`
+                        }
+                    }
+                }else{
+                    if(value == 1){
+                        return `1 ${key} ago`
+                    }else{
+                        return `${value} ${key}s ago`
+                    }
+                }
+            }
+        }
+    }
 
     return (
         <div className='sv-home'>
@@ -237,7 +318,11 @@ const SingleVideo = (props) => {
                                         <div className='comment-right'>
                                             <Link to={item.snippet.topLevelComment.snippet.authorChannelUrl} className='comment-right-top'>
                                                 <strong>@{item.snippet.topLevelComment.snippet.authorDisplayName}</strong>
-                                                <span className='comment-date'>{convertDate(item.snippet.topLevelComment.snippet.publishedAt)}</span>
+                                                <span className='comment-date'>{
+                                                    convertDate2(item.snippet.topLevelComment.snippet.publishedAt)?
+                                                    convertDate2(item.snippet.topLevelComment.snippet.publishedAt):
+                                                    "Less than an hour ago"
+                                                }</span>
                                             </Link>
                                             <p className='comment-right-middle'>{item.snippet.topLevelComment.snippet.textDisplay}</p>
                                             <div className='comment-right-action'>
