@@ -27,25 +27,38 @@ const SingleVideo = (props) => {
     const [publishedAt, setPublishedAt] = useState("")
     const [description, setDescription] = useState("")
     const [commentsList, setCommentsList] = useState([])
+    const [relatedVideos, setRelatedVideos] = useState([])
     const {channelId, videoId} = props
     const key = "AIzaSyDUTRDsWBWMeamCR3lfll4dYnaIrW6JTjs"
 
 
     // multiple urls in one axios request
     /*let urls = [
+        // [0] = video - getting most recent video by channel ID
         `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=1&order=date&key=${key}`,
-        `https://youtube.googleapis.com/youtube/v3/videos?part=statistics&id=${video}&key=${key}`
-        Popular Music = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2Cstatistics&chart=mostPopular&maxResults=9&regionCode=US&videoCategoryId=10&key=${key}`
+        // [1] = viewcount and statistics
+        `https://youtube.googleapis.com/youtube/v3/videos?part=statistics&id=${videoId}&key=${key}`
+        // [2] = comments for the video should list 10
+        `https://www.googleapis.com/youtube/v3/commentThreads?key=${key}&textFormat=plainText&part=snippet&videoId=${videoId}&maxResults=10`
+        // [3] = subscriber count
+        //`https://youtube.googleapis.com/youtube/v3/channels?part=statistics&id=${channelId}&key=${key}`
+        // [4] = related videos
+        //`https://www.googleapis.com/youtube/v3/search?part=snippet&relatedToVideoId=${videoId}&type=video&key=${key}`
     ]
-    const requests = urls.map((url) => axios.get(url))
     useEffect(() => {
-        axios.all(requests)
+        Promise.all(urls.map((url) => axios.get(url)))
         .then((result) => {
-            let msg = {
-                video: result.snippet,
-                statistics: result.statistics
-            }
-            console.table(msg)
+            var video = result[0].data.items[0]
+            setVideo(video.id.videoId)
+            setVideoTitle(video.snippet.title)
+            setVideoChannel(video.snippet.channelTitle)
+            setDescription(video.snippet.description)
+            setPublishedAt(convertDate1(video.snippet.publishedAt))
+            var stats = result[1].data.items[0].statistics
+            console.log(stats)
+            setViewCount(convertCount(stats.viewCount))
+            setLikeCount(convertCount(stats.likeCount))
+            setCommentCount(stats.commentCount.toLocaleString("en-US"))
         })
         .catch((err) => {
             console.log(err)
@@ -84,7 +97,7 @@ const SingleVideo = (props) => {
 
     // comments for the video should list 5
     /*useEffect(() => {
-        axios.get(`https://www.googleapis.com/youtube/v3/commentThreads?key=${key}&textFormat=plainText&part=snippet&videoId=${videoId}&maxResults=5`)
+        axios.get(`https://www.googleapis.com/youtube/v3/commentThreads?key=${key}&textFormat=plainText&part=snippet&videoId=${videoId}&maxResults=10`)
         .then((result) => {
             var comments = result.data.items
             setCommentsList(comments)
@@ -105,12 +118,25 @@ const SingleVideo = (props) => {
         })
     },[])*/
 
+    // related videos
+    useEffect(() => {
+        axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&relatedToVideoId=${videoId}&type=video&key=${key}&maxResults=2`)
+        .then((result) => {
+            setRelatedVideos(result.data.items)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    },[])
+
+
     // embed video - source video
     const url1 = `https://www.youtube-nocookie.com/embed/${video}`
     // link to channel
     const url2 = `https://www.youtube.com/channel/${channelId}`
     // link to actual video on youtube.com
     const url3 = `https://www.youtube-nocookie.com/watch?v=${video}`
+    const url4 = "https://www.youtube.com/watch?v=G42RJ4mKj1k"
 
     function convertCount(num){
         if(num == 0){
@@ -154,81 +180,40 @@ const SingleVideo = (props) => {
     }
 
     function convertDate2(publishedDate){
-        var currentDate = new Date()
-        if(currentDate.getMonth() <= 9){
-            currentDate = "".concat("0",currentDate.toLocaleString("en-US", {timeZone: "America/Los_Angeles"}))
-        }else{
-            currentDate = currentDate.toLocaleString("en-US", {timeZone: "America/Los_Angeles"})
+        var current = new Date()
+        var cdate = new Date(current.getFullYear(), current.getMonth(), current.getDate(), current.getHours())
+        var csec = Math.floor( cdate / 1000 ) - 28800;
+    
+        var publishedDate = new Date(publishedDate)
+        var pdate = new Date(publishedDate.getFullYear(), publishedDate.getMonth(), publishedDate.getDate(), publishedDate.getHours())
+        var psec = Math.floor( pdate / 1000 );
+    
+        var diff = csec - psec
+        const map = {
+            "year": 31536000,
+            "month": 2628288,
+            "week": 604800,
+            "day": 86400,
+            "hour": 3600
         }
-        var [currentHour, currentDay, currentMonth, currentYear] = [Number(currentDate.slice(12,14)), Number(currentDate.slice(3,5)), Number(currentDate.slice(0,2)), Number(currentDate.slice(6,10))]
-        var [publishedHour, publishedDay, publishedMonth, publishedYear] = [Number(publishedDate.slice(11,13)), Number(publishedDate.slice(8,10)), Number(publishedDate.slice(5,7)), Number(publishedDate.slice(0,4))]
-        if(currentDate.endsWith("AM")){
-            currentHour -= 12
-        }else{
-            currentHour += 12
+        const answer = {
+            "year": 0,
+            "month": 0,
+            "week": 0,
+            "day": 0,
+            "hour": 0
         }
-        var difference = {
-            "year":0,
-            "month":0,
-            "day":0,
-            "hour":0
-        }
-        if(currentYear - publishedYear == 1){
-            if(publishedMonth > currentMonth){
-                difference["year"] = 0
-            }else{
-                difference["year"] = 1
-            }
-        }else{
-            difference["year"] = currentYear - publishedYear
-        }
-        if(difference["year"] == 0){
-            if(publishedMonth > currentMonth){
-                difference["month"] = (12 - publishedMonth) + currentMonth
-            }else{
-                difference["month"] = currentMonth - publishedMonth
+        for(const [key, value] of Object.entries(map)){
+            while(diff >= value){
+                diff -= map[key]
+                answer[key] += 1
             }
         }
-        if(difference["month"] == 0){
-            difference["day"] = currentDay - publishedDay
-        }else if(difference["month"] == 1){
-            if(publishedDay > currentDay){
-                difference["month"] = 0
-                difference["day"] = (31 - publishedDay) + currentDay
-            }
-        }else{
-            difference["day"] = (31 - publishedDay) + currentDay
-        }
-        if(difference["day"] == 0){
-            difference["hour"] = currentHour - publishedHour
-        }else if(difference["day"] >= 1){
-            if(publishedHour > currentHour){
-                difference["day"] -= 1
-                difference["hour"] = (24 - publishedHour) + currentHour
-            }
-        }
-        for (const [key, value] of Object.entries(difference)) {
-            if(value > 0){
-                if(key == "day"){
-                    if(value == 1){
-                        return "1 day ago"
-                    }else if(value <= 7){
-                        return `${value} days ago`
-                    }else{
-                        var weeks = Math.round(value / 7)
-                        if(weeks == 1){
-                            return "1 week ago"
-                        }else{
-                            return `${weeks} weeks ago`
-                        }
-                    }
-                }else{
-                    if(value == 1){
-                        return `1 ${key} ago`
-                    }else{
-                        return `${value} ${key}s ago`
-                    }
-                }
+        for(const [key, value] of Object.entries(answer)){
+            if(value == 1){
+                return `${value} ${key} ago`
+            }else if(value > 1){
+                return `${value} ${key}s ago`
             }
         }
     }
@@ -239,10 +224,11 @@ const SingleVideo = (props) => {
             <div className='sv-main'>
                 <div className='sv-container-left'>
                     <iframe className='sv-video'
-                    src = {url1}
-                    title="YouTube video player" frameBorder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowFullScreen></iframe>
+                        src = {url1}
+                        title="YouTube video player" frameBorder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen>
+                    </iframe>
                     <div className='sv-video-header'>
                         <div className='video-header-top'>
                             <p className='sv-title'>{videoTitle}</p>
@@ -367,6 +353,24 @@ const SingleVideo = (props) => {
                                 <a href='https://www.vividseats.com/'>Buy now</a>
                             </button>
                         </div>
+                    </div>
+                    <div className='related-videos'>
+                            {
+                                relatedVideos.map((item, index) => (
+                                    <div className='related-video' key={index}>
+                                        <iframe className='related-video-left'
+                                            //src = {`https://www.youtube-nocookie.com/embed/${item.id.videoId}`}
+                                            src = {url4}
+                                            title="YouTube video player" frameBorder="0" 
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                            allowFullScreen>
+                                        </iframe>
+                                        <div className='related-video-right'>
+                                            
+                                        </div>
+                                    </div>
+                                ))
+                            }
                     </div>
                 </div>
             </div>
