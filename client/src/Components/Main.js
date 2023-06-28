@@ -23,6 +23,7 @@ import Video10 from './Video10'
 
 const Main = (props) => {
     const {channelId, setChannelId, videoId, setVideoId} = props
+    setVideoId("")
 
     return (
         <div className='main'>

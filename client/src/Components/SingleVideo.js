@@ -17,7 +17,6 @@ import { AiOutlineEllipsis } from "react-icons/ai";
 import { AiFillCaretDown } from "react-icons/ai";
 
 const SingleVideo = (props) => {
-    const [video, setVideo] = useState("")
     const [videoTitle, setVideoTitle] = useState("")
     const [videoChannel, setVideoChannel] = useState("")
     const [subCount, setSubCount] = useState("")
@@ -39,7 +38,7 @@ const SingleVideo = (props) => {
         // [1] = viewcount and statistics
         `https://youtube.googleapis.com/youtube/v3/videos?part=statistics&id=${videoId}&key=${key}`
         // [2] = comments for the video should list 10
-        `https://www.googleapis.com/youtube/v3/commentThreads?key=${key}&textFormat=plainText&part=snippet&videoId=${videoId}&maxResults=10`
+        //`https://www.googleapis.com/youtube/v3/commentThreads?key=${key}&textFormat=plainText&part=snippet&videoId=${videoId}&maxResults=10`
         // [3] = subscriber count
         //`https://youtube.googleapis.com/youtube/v3/channels?part=statistics&id=${channelId}&key=${key}`
         // [4] = related videos
@@ -49,7 +48,6 @@ const SingleVideo = (props) => {
         Promise.all(urls.map((url) => axios.get(url)))
         .then((result) => {
             var video = result[0].data.items[0]
-            setVideo(video.id.videoId)
             setVideoTitle(video.snippet.title)
             setVideoChannel(video.snippet.channelTitle)
             setDescription(video.snippet.description)
@@ -70,7 +68,6 @@ const SingleVideo = (props) => {
         axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=1&order=date&key=${key}`)
         .then((result) => {
             var video = result.data.items[0]
-            setVideo(video.id.videoId)
             setVideoTitle(video.snippet.title)
             setVideoChannel(video.snippet.channelTitle)
             setDescription(video.snippet.description)
@@ -119,7 +116,7 @@ const SingleVideo = (props) => {
     },[])*/
 
     // related videos
-    useEffect(() => {
+    /*useEffect(() => {
         axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&relatedToVideoId=${videoId}&type=video&key=${key}&maxResults=2`)
         .then((result) => {
             setRelatedVideos(result.data.items)
@@ -127,16 +124,18 @@ const SingleVideo = (props) => {
         .catch((err) => {
             console.log(err)
         })
-    },[])
+    },[])*/
 
 
     // embed video - source video
-    const url1 = `https://www.youtube-nocookie.com/embed/${video}`
+    //const url1 = `https://www.youtube-nocookie.com/embed/${videoId}`
     // link to channel
-    const url2 = `https://www.youtube.com/channel/${channelId}`
+    //const url2 = `https://www.youtube.com/channel/${channelId}`
     // link to actual video on youtube.com
-    const url3 = `https://www.youtube-nocookie.com/watch?v=${video}`
+    const url3 = `https://www.youtube-nocookie.com/watch?v=${videoId}`
     const url4 = "https://www.youtube.com/watch?v=G42RJ4mKj1k"
+
+    // thumbnails default = {item.snippet.thumbnails.default.url}
 
     function convertCount(num){
         if(num == 0){
@@ -224,7 +223,7 @@ const SingleVideo = (props) => {
             <div className='sv-main'>
                 <div className='sv-container-left'>
                     <iframe className='sv-video'
-                        src = {url1}
+                        src = {`https://www.youtube-nocookie.com/embed/${videoId}`}
                         title="YouTube video player" frameBorder="0" 
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen>
@@ -238,7 +237,7 @@ const SingleVideo = (props) => {
                                 <img src={youtubelogo} className='sv-channel-icon'></img>
                                 <div className='sv-channel'>
                                     <div>
-                                        <a href={url2}>{videoChannel}</a>
+                                        <a href={`https://www.youtube.com/channel/${channelId}`}>{videoChannel}</a>
                                         <IconContext.Provider value={{ className: "checkmark"}}>
                                             <BsFillCheckCircleFill />
                                         </IconContext.Provider>
@@ -304,7 +303,7 @@ const SingleVideo = (props) => {
                                         <div className='comment-right'>
                                             <Link to={item.snippet.topLevelComment.snippet.authorChannelUrl} className='comment-right-top'>
                                                 <strong>@{item.snippet.topLevelComment.snippet.authorDisplayName}</strong>
-                                                <span className='comment-date'>{
+                                                <span className='posted-date'>{
                                                     convertDate2(item.snippet.topLevelComment.snippet.publishedAt)?
                                                     convertDate2(item.snippet.topLevelComment.snippet.publishedAt):
                                                     "Less than an hour ago"
@@ -355,21 +354,33 @@ const SingleVideo = (props) => {
                         </div>
                     </div>
                     <div className='related-videos'>
+                        <div className='related-video'>
+                            <img src = {"https://i.ytimg.com/vi/0IHIPNtVVn8/default.jpg"} className='related-video-left'></img>
+                            <div className='related-video-right'>
+                                <p className='related-video-title'>Post Malone - Wrapped Around Your Finger (Official Lyric Video)</p>
+                                <div className=''>
+                                    <p>PowerfulJRE</p>
+                                    <IconContext.Provider value={{ className: "checkmark"}}>
+                                        <BsFillCheckCircleFill />
+                                    </IconContext.Provider>
+                                </div>
+                                <p className='posted-date'>{}</p>
+                            </div>
+                        </div>
                             {
-                                relatedVideos.map((item, index) => (
+                                /*relatedVideos.map((item, index) => (
                                     <div className='related-video' key={index}>
                                         <iframe className='related-video-left'
-                                            //src = {`https://www.youtube-nocookie.com/embed/${item.id.videoId}`}
-                                            src = {url4}
+                                            src = {`https://www.youtube-nocookie.com/embed/${item.id.videoId}`}
+                                            //src = {url4}
                                             title="YouTube video player" frameBorder="0" 
                                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                                             allowFullScreen>
                                         </iframe>
                                         <div className='related-video-right'>
-                                            
                                         </div>
                                     </div>
-                                ))
+                                ))*/
                             }
                     </div>
                 </div>

@@ -1,15 +1,21 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from "react-router-dom";
 import '../css/main.css'
 import Navbar from './Navbar'
 import Sidebar from './Sidebar'
+import { IconContext } from 'react-icons/lib';
+import { BsFillCheckCircleFill } from "react-icons/bs";
 
-const Music = () => {
+const Music = (props) => {
     const [musicList, setMusicList] = useState([])
+    const {channelId, videoId, setVideoId} = props
+    const navigate = useNavigate()
 
     const key = "AIzaSyDUTRDsWBWMeamCR3lfll4dYnaIrW6JTjs"
 
-    useEffect(() => {
+    // top 15 most popular songs
+    /*useEffect(() => {
         axios.get(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=15&regionCode=es&videoCategoryId=10&key=${key}`)
         .then((result) => {
             setMusicList(result.data.items)
@@ -17,14 +23,9 @@ const Music = () => {
         .catch((err) => {
             console.log(err)
         })
-    },[])
+    },[])*/
 
     const url1 = "https://www.youtube.com/embed/G42RJ4mKj1k"
-    // embed video = `https://www.youtube.com/embed/${item.id}`
-    // channel icon = {item.snippet.thumbnails.default.url}
-    // channel id = {item.snippet.channelId}
-    // video title = {item.snippet.title}
-    // channel title = {item.snippet.channelTitle}
     // uploaded =  = {convertDate2(item.snippet.publishedAt)}
 
     function convertDate2(publishedDate){
@@ -66,24 +67,21 @@ const Music = () => {
         }
     }
 
+    const singleVideoHandler = (e) => {
+        console.log(e)
+        setVideoId(e)
+        navigate('/video')
+    }
+
     return (
         <div className='home'>
             <Navbar/>
             <Sidebar/>
             <div className='main'>
                 <div className='videos'>
-                    <div className='container'>
-                        <iframe className='video'
-                            src = {url1}
-                            title="YouTube video player" frameBorder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowFullScreen>
-                        </iframe>
-                    </div>
-                </div>
                 {
-                    /*musicList.map((item,index) => (
-                        <div className='container' key={index}>
+                    musicList.map((item,index) => (
+                        <div onClick={() => singleVideoHandler(item.id)} className='container' key={index}>
                             <iframe className='video'
                                 src = {`https://www.youtube.com/embed/${item.id}`}
                                 title="YouTube video player" frameBorder="0" 
@@ -97,7 +95,7 @@ const Music = () => {
                                 <div className='video-description-right'>
                                     <a className='title'>{item.snippet.title}</a>
                                     <div className='channel'>
-                                        <a href=`https://www.youtube.com/channel/${item.snippet.channelId}`>{item.snippet.channelTitle}</a>
+                                        <a href={`https://www.youtube.com/channel/${item.snippet.channelId}`}>{item.snippet.channelTitle}</a>
                                         <IconContext.Provider value={{ className: "checkmark"}}>
                                             <BsFillCheckCircleFill />
                                         </IconContext.Provider>
@@ -105,8 +103,9 @@ const Music = () => {
                                 </div>
                             </div>
                         </div>
-                    ))*/
+                    ))
                 }
+                </div>
             </div>
         </div>
     )
