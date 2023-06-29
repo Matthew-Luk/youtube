@@ -1,5 +1,6 @@
 import '../App.css';
 import Navbar from './Navbar';
+import {convertCount, convertDate1, convertDate2} from './functions'
 import React, {useEffect, useState} from 'react'
 import { Link } from "react-router-dom";
 import '../css/singlevideo.css'
@@ -30,102 +31,45 @@ const SingleVideo = (props) => {
     const {channelId, videoId} = props
     const key = "AIzaSyDUTRDsWBWMeamCR3lfll4dYnaIrW6JTjs"
 
-
-    // multiple urls in one axios request
     /*let urls = [
         // [0] = video - getting most recent video by channel ID
         `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=1&order=date&key=${key}`,
         // [1] = viewcount and statistics
-        `https://youtube.googleapis.com/youtube/v3/videos?part=statistics&id=${videoId}&key=${key}`
+        `https://youtube.googleapis.com/youtube/v3/videos?part=statistics&id=${videoId}&key=${key}`,
         // [2] = comments for the video should list 10
-        //`https://www.googleapis.com/youtube/v3/commentThreads?key=${key}&textFormat=plainText&part=snippet&videoId=${videoId}&maxResults=10`
+        `https://www.googleapis.com/youtube/v3/commentThreads?key=${key}&textFormat=plainText&part=snippet&videoId=${videoId}&maxResults=10`,
         // [3] = subscriber count
-        //`https://youtube.googleapis.com/youtube/v3/channels?part=statistics&id=${channelId}&key=${key}`
+        `https://youtube.googleapis.com/youtube/v3/channels?part=statistics&id=${channelId}&key=${key}`,
         // [4] = related videos
-        //`https://www.googleapis.com/youtube/v3/search?part=snippet&relatedToVideoId=${videoId}&type=video&key=${key}`
+        `https://www.googleapis.com/youtube/v3/search?part=snippet&relatedToVideoId=${videoId}&type=video&key=${key}`,
     ]
     useEffect(() => {
-        Promise.all(urls.map((url) => axios.get(url)))
+        axios.all(urls.map((url) => axios.get(url)))
         .then((result) => {
+            // [0]
             var video = result[0].data.items[0]
             setVideoTitle(video.snippet.title)
             setVideoChannel(video.snippet.channelTitle)
             setDescription(video.snippet.description)
             setPublishedAt(convertDate1(video.snippet.publishedAt))
+            // [1]
             var stats = result[1].data.items[0].statistics
-            console.log(stats)
             setViewCount(convertCount(stats.viewCount))
             setLikeCount(convertCount(stats.likeCount))
             setCommentCount(stats.commentCount.toLocaleString("en-US"))
-        })
-        .catch((err) => {
-            console.log(err)
-        })
-    },[])*/
-
-    // video - getting most recent video by channel ID
-    /*useEffect(() => {
-        axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=1&order=date&key=${key}`)
-        .then((result) => {
-            var video = result.data.items[0]
-            setVideoTitle(video.snippet.title)
-            setVideoChannel(video.snippet.channelTitle)
-            setDescription(video.snippet.description)
-            setPublishedAt(convertDate1(video.snippet.publishedAt))
-        })
-        .catch((err) => {
-            console.log(err)
-        })
-    },[])*/
-
-    // viewcount and statistics
-    /*useEffect(() => {
-        axios.get(`https://youtube.googleapis.com/youtube/v3/videos?part=statistics&id=${videoId}&key=${key}`)
-        .then((result) => {
-            var stats = result.data.items[0].statistics
-            setViewCount(convertCount(stats.viewCount))
-            setLikeCount(convertCount(stats.likeCount))
-            setCommentCount(stats.commentCount.toLocaleString("en-US"))
-        })
-        .catch((err) => {
-            console.log(err)
-        })
-    },[])*/
-
-    // comments for the video should list 5
-    /*useEffect(() => {
-        axios.get(`https://www.googleapis.com/youtube/v3/commentThreads?key=${key}&textFormat=plainText&part=snippet&videoId=${videoId}&maxResults=10`)
-        .then((result) => {
-            var comments = result.data.items
+            // [2]
+            var comments = result[2].data.items
             setCommentsList(comments)
+            // [3]
+            setSubCount(convertCount(result[3].data.items[0].statistics.subscriberCount))
+            // [4]
+            setRelatedVideos(result[4].data.items)
+            console.log(result[4].data.items)
         })
         .catch((err) => {
             console.log(err)
         })
     },[])*/
-
-    // subscriber count
-    /*useEffect(() => {
-        axios.get(`https://youtube.googleapis.com/youtube/v3/channels?part=statistics&id=${channelId}&key=${key}`)
-        .then((result) => {
-            setSubCount(convertCount(result.data.items[0].statistics.subscriberCount))
-        })
-        .catch((err) => {
-            console.log(err)
-        })
-    },[])*/
-
-    // related videos
-    /*useEffect(() => {
-        axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&relatedToVideoId=${videoId}&type=video&key=${key}&maxResults=2`)
-        .then((result) => {
-            setRelatedVideos(result.data.items)
-        })
-        .catch((err) => {
-            console.log(err)
-        })
-    },[])*/
-
 
     // embed video - source video
     //const url1 = `https://www.youtube-nocookie.com/embed/${videoId}`
@@ -136,86 +80,6 @@ const SingleVideo = (props) => {
     const url4 = "https://www.youtube.com/watch?v=G42RJ4mKj1k"
 
     // thumbnails default = {item.snippet.thumbnails.default.url}
-
-    function convertCount(num){
-        if(num == 0){
-            return " "
-        }else if (num <= 999){
-            return num.toString()
-        }else if(num >= 1000 && num <=1000000){
-            if((num/1000).toFixed(1) == Math.floor(num/1000)){
-                return Math.floor(num/1000).toString() + "K"
-            }else{
-                return (num/1000).toFixed(1).toString() + "K"
-            }
-        }else{
-            if((num/1000000).toFixed(1) == Math.floor(num/1000000)){
-                return Math.floor(num/1000000).toString() + "M"
-            }else{
-                return (num/1000000).toFixed(1).toString() + "M"
-            }
-        }
-    }
-
-    function convertDate1(date){
-        var map = {
-            "01": "Jan",
-            "02": "Feb",
-            "03": "Mar",
-            "04": "Apr",
-            "05": "May",
-            "06": "Jun",
-            "07": "Jul",
-            "08": "Aug",
-            "09": "Sep",
-            "10": "Oct",
-            "11": "Nov",
-            "12": "Dec",
-        }
-        var year = date.slice(0,4)
-        var month = map[date.slice(5,7)]
-        var day = date.slice(8,10)
-        return(month + " " + day + ", " + year)
-    }
-
-    function convertDate2(publishedDate){
-        var current = new Date()
-        var cdate = new Date(current.getFullYear(), current.getMonth(), current.getDate(), current.getHours())
-        var csec = Math.floor( cdate / 1000 ) - 28800;
-    
-        var publishedDate = new Date(publishedDate)
-        var pdate = new Date(publishedDate.getFullYear(), publishedDate.getMonth(), publishedDate.getDate(), publishedDate.getHours())
-        var psec = Math.floor( pdate / 1000 );
-    
-        var diff = csec - psec
-        const map = {
-            "year": 31536000,
-            "month": 2628288,
-            "week": 604800,
-            "day": 86400,
-            "hour": 3600
-        }
-        const answer = {
-            "year": 0,
-            "month": 0,
-            "week": 0,
-            "day": 0,
-            "hour": 0
-        }
-        for(const [key, value] of Object.entries(map)){
-            while(diff >= value){
-                diff -= map[key]
-                answer[key] += 1
-            }
-        }
-        for(const [key, value] of Object.entries(answer)){
-            if(value == 1){
-                return `${value} ${key} ago`
-            }else if(value > 1){
-                return `${value} ${key}s ago`
-            }
-        }
-    }
 
     return (
         <div className='sv-home'>

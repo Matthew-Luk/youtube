@@ -10,7 +10,7 @@ const Video10 = (props) => {
     const [video1, setVideo1] = useState("")
     const [video1Title, setVideo1Title] = useState("")
     const [video1Channel, setVideo1Channel] = useState("")
-    const {channelId, setChannelId, videoId, setVideoId} = props
+    const {setChannelId, setVideoId} = props
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -31,7 +31,7 @@ const Video10 = (props) => {
 
     const clickHandler = (e) => {
         e.preventDefault()
-        setChannelId("UCzQUP1qoWDoEbmsQxvdjxgQ")
+        setChannelId(video1Channel)
         setVideoId(video1)
         navigate("/video")
     }
@@ -49,7 +49,7 @@ const Video10 = (props) => {
                     <img src={jre} className='channel-icon'></img>
                 </div>
                 <div className='video-description-right'>
-                    <a onClick={clickHandler} className='title' /*href={url2}*/>{video1Title}</a>
+                    <a onClick={clickHandler} className='title'>{video1Title}</a>
                     <div className='channel'>
                         <a href='https://www.youtube.com/channel/UCzQUP1qoWDoEbmsQxvdjxgQ'>{video1Channel}</a>
                         <IconContext.Provider value={{ className: "checkmark"}}>
