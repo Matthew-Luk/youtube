@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import '../css/main.css'
 import Video1 from './Video1'
 import Video2 from './Video2'
@@ -9,10 +9,6 @@ import Video6 from './Video6'
 import Video7 from './Video7'
 import Video8 from './Video8'
 import Video9 from './Video9'
-//import Video10 from './Video10'
-//<Video10 setChannelId={setChannelId} setVideoId={setVideoId}/>
-
-
 
 const Main = (props) => {
     const {setChannelId, setVideoId} = props

@@ -1,5 +1,5 @@
 import './App.css';
-import {BrowserRouter, Routes, Router, Route, Navigate} from 'react-router-dom';
+import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
 import { useState } from 'react';
 import Home from './Components/Home';
 import SingleVideo from './Components/SingleVideo';
@@ -16,7 +16,7 @@ function App() {
           <Route path="/" element={<Navigate to = "/home"/>}/>
           <Route path="/home" element={<Home setChannelId={setChannelId} setVideoId={setVideoId}/>}/>
           <Route path='/video' element={<SingleVideo channelId={channelId} videoId={videoId}/>}/>
-          <Route path='/music' element={<Music channelId={channelId} videoId={videoId} setVideoId={setVideoId}/>}/>
+          <Route path='/music' element={<Music setVideoId={setVideoId}/>}/>
         </Routes>
       </BrowserRouter>
     </div>
