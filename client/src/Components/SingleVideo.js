@@ -31,17 +31,17 @@ const SingleVideo = (props) => {
     const {channelId, videoId} = props
     const key = "AIzaSyDUTRDsWBWMeamCR3lfll4dYnaIrW6JTjs"
 
-    /*let urls = [
+    let urls = [
         // [0] = video - getting most recent video by channel ID
         `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=1&order=date&key=${key}`,
         // [1] = viewcount and statistics
         `https://youtube.googleapis.com/youtube/v3/videos?part=statistics&id=${videoId}&key=${key}`,
-        // [2] = comments for the video should list 10
-        `https://www.googleapis.com/youtube/v3/commentThreads?key=${key}&textFormat=plainText&part=snippet&videoId=${videoId}&maxResults=10`,
+        // [2] = comments for the video should list 25
+        `https://www.googleapis.com/youtube/v3/commentThreads?key=${key}&textFormat=plainText&part=snippet&videoId=${videoId}&maxResults=25`,
         // [3] = subscriber count
         `https://youtube.googleapis.com/youtube/v3/channels?part=statistics&id=${channelId}&key=${key}`,
         // [4] = related videos
-        `https://www.googleapis.com/youtube/v3/search?part=snippet&relatedToVideoId=${videoId}&type=video&key=${key}`,
+        `https://www.googleapis.com/youtube/v3/search?part=snippet&relatedToVideoId=${videoId}&type=video&maxResults=20&key=${key}`
     ]
     useEffect(() => {
         axios.all(urls.map((url) => axios.get(url)))
@@ -69,17 +69,7 @@ const SingleVideo = (props) => {
         .catch((err) => {
             console.log(err)
         })
-    },[])*/
-
-    // embed video - source video
-    //const url1 = `https://www.youtube-nocookie.com/embed/${videoId}`
-    // link to channel
-    //const url2 = `https://www.youtube.com/channel/${channelId}`
-    // link to actual video on youtube.com
-    const url3 = `https://www.youtube-nocookie.com/watch?v=${videoId}`
-    const url4 = "https://www.youtube.com/watch?v=G42RJ4mKj1k"
-
-    // thumbnails default = {item.snippet.thumbnails.default.url}
+    },[])
 
     return (
         <div className='sv-home'>
@@ -218,34 +208,23 @@ const SingleVideo = (props) => {
                         </div>
                     </div>
                     <div className='related-videos'>
-                        <div className='related-video'>
-                            <img src = {"https://i.ytimg.com/vi/0IHIPNtVVn8/default.jpg"} className='related-video-left'></img>
-                            <div className='related-video-right'>
-                                <p className='related-video-title'>Post Malone - Wrapped Around Your Finger (Official Lyric Video)</p>
-                                <div className=''>
-                                    <p>PowerfulJRE</p>
-                                    <IconContext.Provider value={{ className: "checkmark"}}>
-                                        <BsFillCheckCircleFill />
-                                    </IconContext.Provider>
-                                </div>
-                                <p className='posted-date'>{}</p>
-                            </div>
-                        </div>
-                            {
-                                /*relatedVideos.map((item, index) => (
-                                    <div className='related-video' key={index}>
-                                        <iframe className='related-video-left'
-                                            src = {`https://www.youtube-nocookie.com/embed/${item.id.videoId}`}
-                                            //src = {url4}
-                                            title="YouTube video player" frameBorder="0" 
-                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                            allowFullScreen>
-                                        </iframe>
-                                        <div className='related-video-right'>
+                        {
+                            relatedVideos.map((item, index) => (
+                                <div className='related-video' key={index}>
+                                    <img src = {item.snippet.thumbnails.default.url} className='related-video-left'></img>
+                                    <div className='related-video-right'>
+                                        <p className='related-video-title'>{item.snippet.title}</p>
+                                        <div className='related-video-info'>
+                                            <a className='related-video-channel' href={`https://www.youtube.com/channel/${item.snippet.channelId}`}>{item.snippet.channelTitle}</a>
+                                            <IconContext.Provider value={{ className: "checkmark"}}>
+                                                <BsFillCheckCircleFill />
+                                            </IconContext.Provider>
+                                            <p className='published'>{convertDate2(item.snippet.publishedAt)}</p>
                                         </div>
                                     </div>
-                                ))*/
-                            }
+                                </div>
+                            ))
+                        }
                     </div>
                 </div>
             </div>

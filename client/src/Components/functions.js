@@ -1,4 +1,4 @@
-/*export function convertCount(num){
+export function convertCount(num){
     if(num == 0){
         return " "
     }else if (num <= 999){
@@ -40,61 +40,39 @@ export function convertDate1(date){
 }
 
 export function convertDate2(publishedDate){
-    var current = new Date()
-    var cdate = new Date(current.getFullYear(), current.getMonth(), current.getDate(), current.getHours())
-    var csec = Math.floor( cdate / 1000 ) - 28800;
+    var prevTime = new Date(publishedDate)
+    var thisTime = new Date()
+    var diff = ((thisTime.getTime() - prevTime.getTime()) / 1000) - 28800
 
-    var publishedDate = new Date(publishedDate)
-    var pdate = new Date(publishedDate.getFullYear(), publishedDate.getMonth(), publishedDate.getDate(), publishedDate.getHours())
-    var psec = Math.floor( pdate / 1000 );
-
-    var diff = csec - psec
-    console.log("Working")
     const map = {
         "year": 31536000,
         "month": 2628288,
         "week": 604800,
         "day": 86400,
-        "hour": 3600
+        "hour": 3600,
+        "minute": 60
     }
+
     const answer = {
         "year": 0,
         "month": 0,
         "week": 0,
         "day": 0,
-        "hour": 0
+        "hour": 0,
+        "minute": 0
     }
+
     for(const [key, value] of Object.entries(map)){
         while(diff >= value){
             diff -= map[key]
             answer[key] += 1
         }
-    }
-    for(const [key, value] of Object.entries(answer)){
-        if(value == 1){
-            return `${value} ${key} ago`
-        }else if(value > 1){
-            return `${value} ${key}s ago`
+        if(answer[key] != 0){
+            if(answer[key] == 1){
+                return `${answer[key]} ${key} ago`
+            }else{
+                return `${answer[key]} ${key}s ago`
+            }
         }
     }
-}*/
-
-function convertDate3(publishedDate){
-    var prevTime = new Date(publishedDate)
-    var thisTime = new Date()
-
-    console.log(prevTime)
-    console.log(thisTime)
-    var diff = (thisTime.getTime() - prevTime.getTime()) / 1000
-    console.log(diff)
-
-    const map = {
-        "year": 31536000,
-        "month": 2628288,
-        "week": 604800,
-        "day": 86400,
-        "hour": 3600
-    }
 }
-
-convertDate3("2023-06-29T05:36:46.976Z")

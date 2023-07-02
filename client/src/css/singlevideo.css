@@ -172,6 +172,7 @@
 .sv-video-description-header {
     display: flex;
     gap: 8px;
+    font-weight: 600;
 }
 
 /* Comment Section */
@@ -352,9 +353,30 @@
 }
 
 .related-video-right {
+    display: flex;
+    flex-direction: column;
     flex: 2.5;
 }
 
 .related-video-title {
     font-size: 14px;
+}
+
+.related-video-info {
+    display: flex;
+    font-size: 12px;
+    align-items: center;
+    color: #606060;
+    margin-top: 8px;
+}
+
+.related-video-channel {
+    text-decoration: none;
+    color: #606060;
+}
+
+.published {
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
 }

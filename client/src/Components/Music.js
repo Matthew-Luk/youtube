@@ -15,7 +15,7 @@ const Music = (props) => {
     const key = "AIzaSyDUTRDsWBWMeamCR3lfll4dYnaIrW6JTjs"
 
     // top 15 most popular songs
-    /*useEffect(() => {
+    useEffect(() => {
         axios.get(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=15&regionCode=es&videoCategoryId=10&key=${key}`)
         .then((result) => {
             setMusicList(result.data.items)
@@ -23,7 +23,7 @@ const Music = (props) => {
         .catch((err) => {
             console.log(err)
         })
-    },[])*/
+    },[])
 
     const url1 = "https://www.youtube.com/embed/G42RJ4mKj1k"
     // uploaded =  = {convertDate2(item.snippet.publishedAt)}

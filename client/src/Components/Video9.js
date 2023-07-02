@@ -1,36 +1,44 @@
 import React, {useEffect, useState} from 'react'
-import '../css/video.css'
+import { useNavigate } from "react-router-dom";
 import axios from 'axios'
+import '../css/video.css'
 import ufc from '../images/ufc.jpg'
 import { IconContext } from 'react-icons/lib';
 import { BsFillCheckCircleFill } from "react-icons/bs";
 
-const Video9 = () => {
+const Video9 = (props) => {
     const [video9, setVideo9] = useState("")
     const [video9Title, setVideo9Title] = useState("")
     const [video9Channel, setVideo9Channel] = useState("")
+    const [video9ChannelId, setVideo9ChannelId] = useState("")
+    const {setChannelId, setVideoId} = props
+    const navigate = useNavigate()
 
-    /*useEffect(() => {
+    useEffect(() => {
         axios.get("https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCvgfXK4nTYKudb0rFR6noLA&maxResults=1&order=date&key=AIzaSyDUTRDsWBWMeamCR3lfll4dYnaIrW6JTjs")
         .then((result) => {
             var video = result.data.items[0]
             setVideo9(video.id.videoId)
             setVideo9Title(video.snippet.title)
             setVideo9Channel(video.snippet.channelTitle)
+            setVideo9ChannelId(video.snippet.channelId)
         })
         .catch((err) => {
-            console.log(err)/
+            console.log(err)
         })
-    },[])*/
+    },[])
 
-    const url1 = `https://www.youtube.com/embed/${video9}`
-    const url2 = `https://www.youtube.com/watch?v=${video9}`
-
+    const clickHandler = (e) => {
+        e.preventDefault()
+        setChannelId(video9ChannelId)
+        setVideoId(video9)
+        navigate("/video")
+    }
 
     return (
         <div className='container'>
             <iframe className='video'
-                src = {url1}
+                src = {`https://www.youtube.com/embed/${video9}`}
                 title="YouTube video player" frameBorder="0" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                 allowFullScreen>
@@ -40,9 +48,9 @@ const Video9 = () => {
                     <img src={ufc} className='channel-icon'></img>
                 </div>
                 <div className='video-description-right'>
-                    <a className='title' href={url2}>{video9Title}</a>
+                    <a onClick={clickHandler} className='title'>{video9Title}</a>
                     <div className='channel'>
-                        <a href='https://www.youtube.com/@ufc/videos'>{video9Channel}</a>
+                        <a href={`https://www.youtube.com/channel/${video9Channel}`}>{video9Channel}</a>
                         <IconContext.Provider value={{ className: "checkmark"}}>
                             <BsFillCheckCircleFill />
                         </IconContext.Provider>

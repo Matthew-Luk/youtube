@@ -1,16 +1,17 @@
 import React, {useEffect, useState} from 'react'
-import { useParams, useNavigate } from "react-router-dom";
-import '../css/video.css'
+import { useNavigate } from "react-router-dom";
 import axios from 'axios'
+import '../css/video.css'
 import jre from '../images/jre.jpg'
 import { IconContext } from 'react-icons/lib';
 import { BsFillCheckCircleFill } from "react-icons/bs";
 
-const Video1 = () => {
+const Video1 = (props) => {
     const [video1, setVideo1] = useState("")
     const [video1Title, setVideo1Title] = useState("")
     const [video1Channel, setVideo1Channel] = useState("")
-    const {id} = useParams()
+    const [video1ChannelId, setVideo1ChannelId] = useState("")
+    const {setChannelId, setVideoId} = props
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -20,23 +21,24 @@ const Video1 = () => {
             setVideo1(video.id.videoId)
             setVideo1Title(video.snippet.title)
             setVideo1Channel(video.snippet.channelTitle)
+            setVideo1ChannelId(video.snippet.channelId)
         })
         .catch((err) => {
             console.log(err)
         })
     },[])
 
-    const url1 = `https://www.youtube.com/embed/${video1}`
-    const url2 = `https://www.youtube.com/watch?v=${video1}`
-
     const clickHandler = (e) => {
         e.preventDefault()
+        setChannelId(video1ChannelId)
+        setVideoId(video1)
+        navigate("/video")
     }
 
     return (
         <div className='container'>
             <iframe className='video'
-                src = {url1}
+                src = {`https://www.youtube.com/embed/${video1}`}
                 title="YouTube video player" frameBorder="0" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                 allowFullScreen>
@@ -46,9 +48,9 @@ const Video1 = () => {
                     <img src={jre} className='channel-icon'></img>
                 </div>
                 <div className='video-description-right'>
-                    <a className='title' href={url2}>{video1Title}</a>
+                    <a onClick={clickHandler} className='title'>{video1Title}</a>
                     <div className='channel'>
-                        <a href='https://www.youtube.com/channel/UCzQUP1qoWDoEbmsQxvdjxgQ'>{video1Channel}</a>
+                        <a href={`https://www.youtube.com/channel/${video1Channel}`}>{video1Channel}</a>
                         <IconContext.Provider value={{ className: "checkmark"}}>
                             <BsFillCheckCircleFill />
                         </IconContext.Provider>

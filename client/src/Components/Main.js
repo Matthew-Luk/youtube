@@ -1,24 +1,17 @@
 import React, {useEffect} from 'react'
 import '../css/main.css'
-//import Video1 from './Video1'
-//import Video2 from './Video2'
-import Video10 from './Video10'
-//<Video1/>
-//<Video2/>
-//import Video3 from './Video3'
-//import Video4 from './Video4'
-//import Video5 from './Video5'
-//import Video6 from './Video6'
-//import Video7 from './Video7'
-//import Video8 from './Video8'
-//import Video9 from './Video9'
-//<Video3/>
-//<Video4/>
-//<Video5/>
-//<Video6/>
-//<Video7/>
-//<Video8/>
-//<Video9/>
+import Video1 from './Video1'
+import Video2 from './Video2'
+import Video3 from './Video3'
+import Video4 from './Video4'
+import Video5 from './Video5'
+import Video6 from './Video6'
+import Video7 from './Video7'
+import Video8 from './Video8'
+import Video9 from './Video9'
+//import Video10 from './Video10'
+//<Video10 setChannelId={setChannelId} setVideoId={setVideoId}/>
+
 
 
 const Main = (props) => {
@@ -69,7 +62,15 @@ const Main = (props) => {
                 </button>
             </div>
             <div className='videos'>
-                <Video10 setChannelId={setChannelId} setVideoId={setVideoId}/>
+                <Video1 setChannelId={setChannelId} setVideoId={setVideoId}/>
+                <Video2 setChannelId={setChannelId} setVideoId={setVideoId}/>
+                <Video3 setChannelId={setChannelId} setVideoId={setVideoId}/>
+                <Video4 setChannelId={setChannelId} setVideoId={setVideoId}/>
+                <Video5 setChannelId={setChannelId} setVideoId={setVideoId}/>
+                <Video6 setChannelId={setChannelId} setVideoId={setVideoId}/>
+                <Video7 setChannelId={setChannelId} setVideoId={setVideoId}/>
+                <Video8 setChannelId={setChannelId} setVideoId={setVideoId}/>
+                <Video9 setChannelId={setChannelId} setVideoId={setVideoId}/>
             </div>
         </div>
     )
