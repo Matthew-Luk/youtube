@@ -42,6 +42,11 @@
     font-weight: 600;
     font-size: 14px;
     text-decoration: none;
+    cursor: pointer;
+}
+
+.title:hover, .title:active {
+    cursor: pointer;
 }
 
 .channel-icon {
