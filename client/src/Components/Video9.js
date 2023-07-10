@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import { useNavigate } from "react-router-dom";
+import {parseHtmlEntities} from './functions'
 import axios from 'axios'
 import '../css/video.css'
 import ufc from '../images/ufc.jpg'
@@ -19,7 +20,7 @@ const Video9 = (props) => {
         .then((result) => {
             var video = result.data.items[0]
             setVideo9(video.id.videoId)
-            setVideo9Title(video.snippet.title)
+            setVideo9Title(parseHtmlEntities(video.snippet.title))
             setVideo9Channel(video.snippet.channelTitle)
             setVideo9ChannelId(video.snippet.channelId)
         })
@@ -32,7 +33,7 @@ const Video9 = (props) => {
         e.preventDefault()
         setChannelId(video9ChannelId)
         setVideoId(video9)
-        navigate("/video")
+        navigate(`/video/${video9}`)
     }
 
     return (
@@ -50,7 +51,7 @@ const Video9 = (props) => {
                 <div className='video-description-right'>
                     <a onClick={clickHandler} className='title'>{video9Title}</a>
                     <div className='channel'>
-                        <a href={`https://www.youtube.com/channel/${video9Channel}`}>{video9Channel}</a>
+                        <a href={`https://www.youtube.com/channel/${video9ChannelId}`}>{video9Channel}</a>
                         <IconContext.Provider value={{ className: "checkmark"}}>
                             <BsFillCheckCircleFill />
                         </IconContext.Provider>

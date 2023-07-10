@@ -24,8 +24,6 @@ const Music = (props) => {
         })
     },[])
 
-    // uploaded =  = {convertDate2(item.snippet.publishedAt)}
-
     const clickHandler = (e) => {
         console.log(e)
         setVideoId(e)
@@ -58,6 +56,7 @@ const Music = (props) => {
                                         <IconContext.Provider value={{ className: "checkmark"}}>
                                             <BsFillCheckCircleFill />
                                         </IconContext.Provider>
+                                        <p className='published'>{convertDate2(item.snippet.publishedAt)}</p>
                                     </div>
                                 </div>
                             </div>
