@@ -1,8 +1,8 @@
 import '../App.css';
 import Navbar from './Navbar';
-import {convertCount, convertDate1, convertDate2} from './functions'
+import {convertCount, convertDate1, convertDate2, parseHtmlEntities} from './functions'
 import React, {useEffect, useState} from 'react'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import '../css/singlevideo.css'
 import axios from 'axios'
 import youtubelogo from '../images/youtubelogo.png'
@@ -28,7 +28,8 @@ const SingleVideo = (props) => {
     const [description, setDescription] = useState("")
     const [commentsList, setCommentsList] = useState([])
     const [relatedVideos, setRelatedVideos] = useState([])
-    const {channelId, videoId} = props
+    const {channelId, setChannelId, videoId, setVideoId} = props
+    const navigate = useNavigate()
     const key = "AIzaSyDUTRDsWBWMeamCR3lfll4dYnaIrW6JTjs"
 
     let urls = [
@@ -48,7 +49,7 @@ const SingleVideo = (props) => {
         .then((result) => {
             // [0]
             var video = result[0].data.items[0]
-            setVideoTitle(video.snippet.title)
+            setVideoTitle(parseHtmlEntities(video.snippet.title))
             setVideoChannel(video.snippet.channelTitle)
             setDescription(video.snippet.description)
             setPublishedAt(convertDate1(video.snippet.publishedAt))
@@ -69,7 +70,13 @@ const SingleVideo = (props) => {
         .catch((err) => {
             console.log(err)
         })
-    },[])
+    },[videoId])
+
+    const relatedVideoHandler = (e) => {
+        setVideoId(e.id.videoId)
+        setChannelId(e.snippet.channelId)
+        navigate(`/video/${e.id.videoId}`)
+    }
 
     return (
         <div className='sv-home'>
@@ -213,7 +220,7 @@ const SingleVideo = (props) => {
                                 <div className='related-video' key={index}>
                                     <img src = {item.snippet.thumbnails.default.url} className='related-video-left'></img>
                                     <div className='related-video-right'>
-                                        <p className='related-video-title'>{item.snippet.title}</p>
+                                        <p onClick={() => relatedVideoHandler(item)} className='related-video-title'>{item.snippet.title}</p>
                                         <div className='related-video-info'>
                                             <a className='related-video-channel' href={`https://www.youtube.com/channel/${item.snippet.channelId}`}>{item.snippet.channelTitle}</a>
                                             <IconContext.Provider value={{ className: "checkmark"}}>
