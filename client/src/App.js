@@ -15,7 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Navigate to = "/home"/>}/>
           <Route path="/home" element={<Home setChannelId={setChannelId} setVideoId={setVideoId}/>}/>
-          <Route path='/video' element={<SingleVideo channelId={channelId} videoId={videoId}/>}/>
+          <Route path='/video/:videoId' element={<SingleVideo channelId={channelId} videoId={videoId} setChannelId={setChannelId} setVideoId={setVideoId}/>}/>
           <Route path='/music' element={<Music setVideoId={setVideoId}/>}/>
         </Routes>
       </BrowserRouter>
