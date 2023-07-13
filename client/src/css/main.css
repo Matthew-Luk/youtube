@@ -55,6 +55,10 @@
     grid-template-columns: repeat(3, 1fr);
 }
 
+.mt-80 {
+    margin-top: 0px;
+}
+
 @media(max-width: 1384px) {
     .videos {
         grid-template-columns: repeat(2, 1fr);

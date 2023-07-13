@@ -30,8 +30,7 @@ const Navbar = () => {
                 </div>
             </div>
             <div className='navbar-mid'>
-                <input className='searchBar' placeholder='Search'>
-                </input>
+                <input className='searchBar' placeholder='Search'></input>
                 <button className='searchButton'>
                     <IconContext.Provider value={{className: "icon magnify"}}>
                         <HiOutlineMagnifyingGlass />

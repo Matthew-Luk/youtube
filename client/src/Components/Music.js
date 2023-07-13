@@ -35,7 +35,7 @@ const Music = (props) => {
             <Navbar/>
             <Sidebar/>
             <div className='main'>
-                <div className='videos'>
+                <div className='videos mt-80'>
                 {
                     musicList.map((item,index) => (
                         <div onClick={() => clickHandler(item.id)} className='container' key={index}>

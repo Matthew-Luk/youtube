@@ -1,7 +1,7 @@
 export function convertCount(num){
     if(num == 0){
         return " "
-    }else if (num <= 999){
+    }else if(num <= 999){
         return num.toString()
     }else if(num >= 1000 && num <=1000000){
         if((num/1000).toFixed(1) == Math.floor(num/1000)){
