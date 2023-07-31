@@ -30,7 +30,7 @@ const SingleVideo = (props) => {
     const [relatedVideos, setRelatedVideos] = useState([])
     const {channelId, setChannelId, videoId, setVideoId} = props
     const navigate = useNavigate()
-    const key = "AIzaSyDUTRDsWBWMeamCR3lfll4dYnaIrW6JTjs"
+    const key = "AIzaSyBV2wtszNohOliJ6YkupLzK5q6OBJos904"
 
     let urls = [
         // [0] = video - getting most recent video by channel ID

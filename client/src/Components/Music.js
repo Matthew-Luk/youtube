@@ -10,9 +10,9 @@ import { BsFillCheckCircleFill } from "react-icons/bs";
 
 const Music = (props) => {
     const [musicList, setMusicList] = useState([])
-    const {setVideoId} = props
+    const {setVideoId, setChannelId} = props
     const navigate = useNavigate()
-    const key = "AIzaSyDUTRDsWBWMeamCR3lfll4dYnaIrW6JTjs"
+    const key = "AIzaSyBV2wtszNohOliJ6YkupLzK5q6OBJos904"
 
     useEffect(() => {
         axios.get(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=15&regionCode=es&videoCategoryId=10&key=${key}`)
@@ -25,9 +25,9 @@ const Music = (props) => {
     },[])
 
     const clickHandler = (e) => {
-        console.log(e)
-        setVideoId(e)
-        navigate('/video')
+        setVideoId(e.id.videoId)
+        setChannelId(e.snippet.channelId)
+        navigate(`/video/${e.id.videoId}`)
     }
 
     return (
@@ -38,7 +38,7 @@ const Music = (props) => {
                 <div className='videos mt-80'>
                 {
                     musicList.map((item,index) => (
-                        <div onClick={() => clickHandler(item.id)} className='container' key={index}>
+                        <div onClick={() => clickHandler(item)} className='container' key={index}>
                             <iframe className='video'
                                 src = {`https://www.youtube.com/embed/${item.id}`}
                                 title="YouTube video player" frameBorder="0" 
