@@ -8,8 +8,9 @@ import Video5 from './Video5'
 import Video6 from './Video6'
 import Video7 from './Video7'
 import Video8 from './Video8'
-import Video9 from './Video9'
-<Video2 setChannelId={setChannelId} setVideoId={setVideoId}/>
+import Video9 from './Video9'*/
+
+/*<Video2 setChannelId={setChannelId} setVideoId={setVideoId}/>
 <Video3 setChannelId={setChannelId} setVideoId={setVideoId}/>
 <Video4 setChannelId={setChannelId} setVideoId={setVideoId}/>
 <Video6 setChannelId={setChannelId} setVideoId={setVideoId}/>
@@ -17,6 +18,7 @@ import Video9 from './Video9'
 <Video7 setChannelId={setChannelId} setVideoId={setVideoId}/>
 <Video8 setChannelId={setChannelId} setVideoId={setVideoId}/>
 <Video9 setChannelId={setChannelId} setVideoId={setVideoId}/>*/
+
 
 const Main = (props) => {
     const {setChannelId, setVideoId} = props

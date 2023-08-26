@@ -16,9 +16,9 @@ const Video9 = (props) => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        axios.get("https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCvgfXK4nTYKudb0rFR6noLA&maxResults=1&order=date&key=AIzaSyBV2wtszNohOliJ6YkupLzK5q6OBJos904")
+        axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCvgfXK4nTYKudb0rFR6noLA&maxResults=1&order=date&key=${process.env.REACT_APP_API_KEY}`)
         .then((result) => {
-            var video = result.data.items[0]
+            let video = result.data.items[0]
             setVideo9(video.id.videoId)
             setVideo9Title(parseHtmlEntities(video.snippet.title))
             setVideo9Channel(video.snippet.channelTitle)

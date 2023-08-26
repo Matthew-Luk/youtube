@@ -1,16 +1,16 @@
 export function convertCount(num){
-    if(num == 0){
+    if(num === 0){
         return " "
     }else if(num <= 999){
         return num.toString()
     }else if(num >= 1000 && num <=1000000){
-        if((num/1000).toFixed(1) == Math.floor(num/1000)){
+        if((num/1000).toFixed(1) === Math.floor(num/1000)){
             return Math.floor(num/1000).toString() + "K"
         }else{
             return (num/1000).toFixed(1).toString() + "K"
         }
     }else{
-        if((num/1000000).toFixed(1) == Math.floor(num/1000000)){
+        if((num/1000000).toFixed(1) === Math.floor(num/1000000)){
             return Math.floor(num/1000000).toString() + "M"
         }else{
             return (num/1000000).toFixed(1).toString() + "M"
@@ -67,8 +67,8 @@ export function convertDate2(publishedDate){
             diff -= map[key]
             answer[key] += 1
         }
-        if(answer[key] != 0){
-            if(answer[key] == 1){
+        if(answer[key] !== 0){
+            if(answer[key] === 1){
                 return `${answer[key]} ${key} ago`
             }else{
                 return `${answer[key]} ${key}s ago`

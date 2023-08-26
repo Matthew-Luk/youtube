@@ -12,10 +12,9 @@ const Music = (props) => {
     const [musicList, setMusicList] = useState([])
     const {setVideoId, setChannelId} = props
     const navigate = useNavigate()
-    const key = "AIzaSyBV2wtszNohOliJ6YkupLzK5q6OBJos904"
 
     useEffect(() => {
-        axios.get(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=15&regionCode=es&videoCategoryId=10&key=${key}`)
+        axios.get(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=15&regionCode=es&videoCategoryId=10&key=${process.env.REACT_APP_API_KEY}`)
         .then((result) => {
             setMusicList(result.data.items)
         })
@@ -25,9 +24,9 @@ const Music = (props) => {
     },[])
 
     const clickHandler = (e) => {
-        setVideoId(e.id.videoId)
         setChannelId(e.snippet.channelId)
-        navigate(`/video/${e.id.videoId}`)
+        setVideoId(e.id)
+        navigate(`/video/${e.id}`)
     }
 
     return (

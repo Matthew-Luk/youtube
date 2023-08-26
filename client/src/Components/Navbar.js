@@ -16,6 +16,10 @@ const Navbar = () => {
         navigate("/home")
     }
 
+    const searchHandler = (e) => {
+    
+    }
+
     return (
         <div className='navbar'>
             <div className='navbar-left'>
@@ -29,7 +33,7 @@ const Navbar = () => {
                     <p className='font-link'>YouTube</p>
                 </div>
             </div>
-            <div className='navbar-mid'>
+            <form className='navbar-mid'>
                 <input className='searchBar' placeholder='Search'></input>
                 <button className='searchButton'>
                     <IconContext.Provider value={{className: "icon magnify"}}>
@@ -41,7 +45,7 @@ const Navbar = () => {
                         <IoMicSharp />
                     </IconContext.Provider>
                 </div>
-            </div>
+            </form>
             <div className='navbar-right'>
                 <IconContext.Provider value={{className: "icon ellipsis"}}>
                     <IoEllipsisVerticalSharp />

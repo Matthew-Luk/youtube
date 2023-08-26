@@ -30,42 +30,42 @@ const SingleVideo = (props) => {
     const [relatedVideos, setRelatedVideos] = useState([])
     const {channelId, setChannelId, videoId, setVideoId} = props
     const navigate = useNavigate()
-    const key = "AIzaSyBV2wtszNohOliJ6YkupLzK5q6OBJos904"
 
     let urls = [
         // [0] = video - getting most recent video by channel ID
-        `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=1&order=date&key=${key}`,
+        `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=1&order=date&key=${process.env.REACT_APP_API_KEY}`,
         // [1] = viewcount and statistics
-        `https://youtube.googleapis.com/youtube/v3/videos?part=statistics&id=${videoId}&key=${key}`,
+        `https://youtube.googleapis.com/youtube/v3/videos?part=statistics&id=${videoId}&key=${process.env.REACT_APP_API_KEY}`,
         // [2] = comments for the video should list 25
-        `https://www.googleapis.com/youtube/v3/commentThreads?key=${key}&textFormat=plainText&part=snippet&videoId=${videoId}&maxResults=25`,
+        `https://www.googleapis.com/youtube/v3/commentThreads?key=${process.env.REACT_APP_API_KEY}&textFormat=plainText&part=snippet&videoId=${videoId}&maxResults=25`,
         // [3] = subscriber count
-        `https://youtube.googleapis.com/youtube/v3/channels?part=statistics&id=${channelId}&key=${key}`,
+        `https://youtube.googleapis.com/youtube/v3/channels?part=statistics&id=${channelId}&key=${process.env.REACT_APP_API_KEY}`,
         // [4] = related videos
-        `https://www.googleapis.com/youtube/v3/search?part=snippet&relatedToVideoId=${videoId}&type=video&maxResults=20&key=${key}`
+        //`https://www.googleapis.com/youtube/v3/search?part=snippet&relatedToVideoId=${videoId}&type=video&maxResults=20&key=${process.env.REACT_APP_API_KEY}`
     ]
     useEffect(() => {
         axios.all(urls.map((url) => axios.get(url)))
         .then((result) => {
             // [0]
-            var video = result[0].data.items[0]
+            let video = result[0].data.items[0]
             setVideoTitle(parseHtmlEntities(video.snippet.title))
             setVideoChannel(video.snippet.channelTitle)
             setDescription(video.snippet.description)
             setPublishedAt(convertDate1(video.snippet.publishedAt))
             // [1]
-            var stats = result[1].data.items[0].statistics
+            let stats = result[1].data.items[0].statistics
             setViewCount(convertCount(stats.viewCount))
             setLikeCount(convertCount(stats.likeCount))
             setCommentCount(stats.commentCount.toLocaleString("en-US"))
             // [2]
-            var comments = result[2].data.items
+            let comments = result[2].data.items
             setCommentsList(comments)
             // [3]
             setSubCount(convertCount(result[3].data.items[0].statistics.subscriberCount))
             // [4]
-            setRelatedVideos(result[4].data.items)
+            /*setRelatedVideos(result[4].data.items)
             console.log(result[4].data.items)
+            console.log(video, stats, comments)*/
         })
         .catch((err) => {
             console.log(err)
