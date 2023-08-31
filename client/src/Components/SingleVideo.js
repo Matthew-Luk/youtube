@@ -28,7 +28,7 @@ const SingleVideo = (props) => {
     const [description, setDescription] = useState("")
     const [commentsList, setCommentsList] = useState([])
     const [relatedVideos, setRelatedVideos] = useState([])
-    const {channelId, setChannelId, videoId, setVideoId} = props
+    const {channelId, setChannelId, videoId, setVideoId, searchValue, setSearchValue} = props
     const navigate = useNavigate()
 
     let urls = [
@@ -41,7 +41,9 @@ const SingleVideo = (props) => {
         // [3] = subscriber count
         `https://youtube.googleapis.com/youtube/v3/channels?part=statistics&id=${channelId}&key=${process.env.REACT_APP_API_KEY}`,
         // [4] = related videos
-        //`https://www.googleapis.com/youtube/v3/search?part=snippet&relatedToVideoId=${videoId}&type=video&maxResults=20&key=${process.env.REACT_APP_API_KEY}`
+        //`https://www.googleapis.com/youtube/v3/search?part=snippet&relatedToVideoId=${videoId}&maxResults=20&key=${process.env.REACT_APP_API_KEY}`
+        //`https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=${videoId}&maxResults=20&key=${process.env.REACT_APP_API_KEY}`
+        `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=20&key=${process.env.REACT_APP_API_KEY}`
     ]
     useEffect(() => {
         axios.all(urls.map((url) => axios.get(url)))
@@ -63,9 +65,7 @@ const SingleVideo = (props) => {
             // [3]
             setSubCount(convertCount(result[3].data.items[0].statistics.subscriberCount))
             // [4]
-            /*setRelatedVideos(result[4].data.items)
-            console.log(result[4].data.items)
-            console.log(video, stats, comments)*/
+            setRelatedVideos(result[4].data.items)
         })
         .catch((err) => {
             console.log(err)
@@ -80,7 +80,7 @@ const SingleVideo = (props) => {
 
     return (
         <div className='sv-home'>
-            <Navbar/>
+            <Navbar searchValue={searchValue} setSearchValue={setSearchValue}/>
             <div className='sv-main'>
                 <div className='sv-container-left'>
                     <iframe className='sv-video'
@@ -95,7 +95,7 @@ const SingleVideo = (props) => {
                         </div>
                         <div className='video-header-bottom'>
                             <div className='header-bottom-left'>
-                                <img src={youtubelogo} className='sv-channel-icon'></img>
+                                <img src={youtubelogo} alt='youtube logo' className='sv-channel-icon'></img>
                                 <div className='sv-channel'>
                                     <div>
                                         <a href={`https://www.youtube.com/channel/${channelId}`}>{videoChannel}</a>
@@ -159,7 +159,7 @@ const SingleVideo = (props) => {
                                 commentsList.map((item, index)=>(
                                     <div className='comment' key={index}>
                                         <div className='comment-left'>
-                                            <img src={item.snippet.topLevelComment.snippet.authorProfileImageUrl}></img>
+                                            <img src={item.snippet.topLevelComment.snippet.authorProfileImageUrl} alt='user icon'></img>
                                         </div>
                                         <div className='comment-right'>
                                             <Link to={item.snippet.topLevelComment.snippet.authorChannelUrl} className='comment-right-top'>
@@ -201,10 +201,10 @@ const SingleVideo = (props) => {
                 <div className='sv-container-right'>
                     <div className='ad'>
                         <div className='ad-top'>
-                            <img src={vividseats}></img>
+                            <img src={vividseats} alt='vivid seats background'></img>
                         </div>
                         <div className='ad-bottom'>
-                            <img className='vividseats-icon' src={vividseatsicon}></img>
+                            <img className='vividseats-icon' src={vividseatsicon} alt='vivid seats icon'></img>
                             <div className='ad-bottom-middle'>
                                 <p className='get-tickets'>Get Tickets</p>
                                 <p><strong>Ad</strong> vividseats.com/Get-Tickets/Get-Re</p>
@@ -218,9 +218,9 @@ const SingleVideo = (props) => {
                         {
                             relatedVideos.map((item, index) => (
                                 <div className='related-video' key={index}>
-                                    <img src = {item.snippet.thumbnails.default.url} className='related-video-left'></img>
+                                    <img src = {item.snippet.thumbnails.default.url} alt='related videos thumbnail' className='related-video-left'></img>
                                     <div className='related-video-right'>
-                                        <p onClick={() => relatedVideoHandler(item)} className='related-video-title'>{item.snippet.title}</p>
+                                        <p onClick={() => relatedVideoHandler(item)} className='related-video-title'>{parseHtmlEntities(item.snippet.title)}</p>
                                         <div className='related-video-info'>
                                             <a className='related-video-channel' href={`https://www.youtube.com/channel/${item.snippet.channelId}`}>{item.snippet.channelTitle}</a>
                                             <IconContext.Provider value={{ className: "checkmark"}}>

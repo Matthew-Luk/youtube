@@ -4,11 +4,11 @@ import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 
 function Home(props) {
-    const {setChannelId, setVideoId} = props
+    const {setChannelId, setVideoId, searchValue, setSearchValue} = props
 
     return (
         <div className="home">
-            <Navbar/>
+            <Navbar searchValue={searchValue} setSearchValue={setSearchValue}/>
             <Sidebar/>
             <Main setChannelId={setChannelId} setVideoId={setVideoId}/>
         </div>

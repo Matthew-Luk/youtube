@@ -10,7 +10,7 @@ import { BsFillCheckCircleFill } from "react-icons/bs";
 
 const Music = (props) => {
     const [musicList, setMusicList] = useState([])
-    const {setVideoId, setChannelId} = props
+    const {setVideoId, setChannelId, searchValue, setSearchValue} = props
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -31,7 +31,7 @@ const Music = (props) => {
 
     return (
         <div className='home'>
-            <Navbar/>
+            <Navbar searchValue={searchValue} setSearchValue={setSearchValue}/>
             <Sidebar/>
             <div className='main'>
                 <div className='videos mt-80'>
@@ -46,10 +46,10 @@ const Music = (props) => {
                             </iframe>
                             <div className='video-description'>
                                 <div className='video-description-left'>
-                                    <img src={item.snippet.thumbnails.default.url} className='channel-icon'></img>
+                                    <img src={item.snippet.thumbnails.default.url} alt='channel icon' className='channel-icon'></img>
                                 </div>
                                 <div className='video-description-right'>
-                                    <a className='title'>{item.snippet.title}</a>
+                                    <p className='title'>{item.snippet.title}</p>
                                     <div className='channel'>
                                         <a href={`https://www.youtube.com/channel/${item.snippet.channelId}`}>{item.snippet.channelTitle}</a>
                                         <IconContext.Provider value={{ className: "checkmark"}}>

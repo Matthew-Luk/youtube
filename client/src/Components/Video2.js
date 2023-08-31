@@ -49,7 +49,7 @@ const Video2 = (props) => {
                     <img src={mk} className='channel-icon'></img>
                 </div>
                 <div className='video-description-right'>
-                    <a onClick={clickHandler} className='title'>{video2Title}</a>
+                    <p onClick={clickHandler} className='title'>{video2Title}</p>
                     <div className='channel'>
                         <a href={`https://www.youtube.com/channel/${video2ChannelId}`}>{video2Channel}</a>
                         <IconContext.Provider value={{ className: "checkmark"}}>

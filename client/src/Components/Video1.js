@@ -46,10 +46,10 @@ const Video1 = (props) => {
             </iframe>
             <div className='video-description'>
                 <div className='video-description-left'>
-                    <img src={jre} className='channel-icon'></img>
+                    <img src={jre} className='channel-icon' alt='JRE logo'></img>
                 </div>
                 <div className='video-description-right'>
-                    <a onClick={clickHandler} className='title'>{video1Title}</a>
+                    <p onClick={clickHandler} className='title'>{video1Title}</p>
                     <div className='channel'>
                         <a href={`https://www.youtube.com/channel/${video1ChannelId}`}>{video1Channel}</a>
                         <IconContext.Provider value={{ className: "checkmark"}}>

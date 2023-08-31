@@ -1,5 +1,6 @@
 import React from 'react'
 import '../css/main.css'
+import { useNavigate } from "react-router-dom";
 import Video1 from './Video1'
 /*import Video2 from './Video2'
 import Video3 from './Video3'
@@ -22,7 +23,12 @@ import Video9 from './Video9'*/
 
 const Main = (props) => {
     const {setChannelId, setVideoId} = props
+    const navigate = useNavigate()
     setVideoId("")
+
+    const musicHandler = (e) => {
+        navigate('/music')
+    }
 
     return (
         <div className='main'>
@@ -39,7 +45,7 @@ const Main = (props) => {
                 <button className='category-element'>
                     <p>Podcasts</p>
                 </button>
-                <button className='category-element'>
+                <button onClick={musicHandler} className='category-element'>
                     <p>Music</p>
                 </button>
                 <button className='category-element'>

@@ -9,15 +9,21 @@ import { HiOutlineMagnifyingGlass } from "react-icons/hi2";
 import { ImYoutube } from "react-icons/im";
 import { BiUserCircle } from "react-icons/bi";
 
-const Navbar = () => {
+const Navbar = (props) => {
     const navigate = useNavigate()
+    const {searchValue, setSearchValue} = props
 
     const homeHandler = (e) => {
         navigate("/home")
     }
 
     const searchHandler = (e) => {
-    
+        setSearchValue(e.target.value)
+    }
+
+    const search = (e) => {
+        e.preventDefault()
+        navigate(`/search/${searchValue}`)
     }
 
     return (
@@ -33,8 +39,8 @@ const Navbar = () => {
                     <p className='font-link'>YouTube</p>
                 </div>
             </div>
-            <form className='navbar-mid'>
-                <input className='searchBar' placeholder='Search'></input>
+            <form onSubmit={search} className='navbar-mid'>
+                <input className='searchBar' type={'text'} onChange={searchHandler} placeholder='Search'></input>
                 <button className='searchButton'>
                     <IconContext.Provider value={{className: "icon magnify"}}>
                         <HiOutlineMagnifyingGlass />
