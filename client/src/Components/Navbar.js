@@ -17,13 +17,10 @@ const Navbar = (props) => {
         navigate("/home")
     }
 
-    const searchHandler = (e) => {
-        setSearchValue(e.target.value)
-    }
-
     const search = (e) => {
         e.preventDefault()
-        navigate(`/search/${searchValue}`)
+        setSearchValue(e.target[0].value)
+        navigate(`/search/${e.target[0].value}`)
     }
 
     return (
@@ -40,7 +37,7 @@ const Navbar = (props) => {
                 </div>
             </div>
             <form onSubmit={search} className='navbar-mid'>
-                <input className='searchBar' type={'text'} onChange={searchHandler} placeholder='Search'></input>
+                <input className='searchBar' type={'text'} placeholder='Search'></input>
                 <button className='searchButton'>
                     <IconContext.Provider value={{className: "icon magnify"}}>
                         <HiOutlineMagnifyingGlass />

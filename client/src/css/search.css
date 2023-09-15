@@ -1,0 +1,39 @@
+.search-video {
+    display: flex;
+    margin-bottom: 16px;
+}
+
+.search-page-description {
+    width: 100%;
+    color: black;
+    margin-left: 16px;
+}
+
+.search-page-title {
+    margin-top: 4px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.search-video-description {
+    font-size: 12px;
+    color: #606060;
+}
+
+.video-thumbnail {
+    display: flex;
+    justify-content: center;
+    height: 200px;
+    width: 360px;
+}
+
+.video-thumbnail img:hover {
+    border-radius: 0px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.video-thumbnail img {
+    border-radius: 15px;
+    transition: 0.3s;
+}

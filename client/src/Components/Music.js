@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
-import {convertDate2} from './functions'
+import { convertDate2 } from './functions'
 import '../css/main.css'
 import Navbar from './Navbar'
 import Sidebar from './Sidebar'
