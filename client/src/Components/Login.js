@@ -8,7 +8,7 @@ const Login = (props) => {
     const [error, setError] = useState("")
     const navigate = useNavigate()
 
-    const submitHandler  = (e) => {
+    const submitHandler = (e) => {
         e.preventDefault()
         axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCzQUP1qoWDoEbmsQxvdjxgQ&maxResults=1&order=date&key=${e.target[0].value}`)
         .then(() => {
@@ -19,6 +19,11 @@ const Login = (props) => {
             setError("Please input a valid YouTube data API.")
             navigate('/login')
         })
+    }
+
+    const envHandler = (e) => {
+        setAPIKey(process.env.REACT_APP_API_KEY)
+        navigate('/home')
     }
 
     return (
@@ -38,6 +43,7 @@ const Login = (props) => {
                         <input type={"password"}></input>
                         <div className='login-form-buttons'>
                             <button className='login-button'>OK</button>
+                            <button onClick={envHandler} className='login-button'>Use env</button>
                             <button className='login-button'>Cancel</button>
                         </div>
                     </label>
