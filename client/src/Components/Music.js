@@ -42,19 +42,16 @@ const Music = (props) => {
                 <div className='videos mt-80'>
                 {
                     musicList.map((item,index) => (
-                        <div onClick={() => clickHandler(item)} className='container' key={index}>
-                            <iframe className='video'
-                                src = {`https://www.youtube.com/embed/${item.id}?control=0`}
-                                title="YouTube video player" frameBorder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                allowFullScreen>
-                            </iframe>
+                        <div className='container' key={index}>
+                            <div onClick={() => clickHandler(item)} className='video'>
+                                <img src = {item.snippet.thumbnails.medium.url} alt='thumbnail for the video'></img>
+                            </div>
                             <div className='video-description'>
                                 <div className='video-description-left'>
                                     <img src={item.snippet.thumbnails.default.url} alt='channel icon' className='channel-icon'></img>
                                 </div>
                                 <div className='video-description-right'>
-                                    <p className='title'>{item.snippet.title}</p>
+                                    <p onClick={() => clickHandler(item)} className='title'>{item.snippet.title}</p>
                                     <div className='channel'>
                                         <a href={`https://www.youtube.com/channel/${item.snippet.channelId}`}>{item.snippet.channelTitle}</a>
                                         <IconContext.Provider value={{ className: "checkmark"}}>
