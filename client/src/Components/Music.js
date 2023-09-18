@@ -10,17 +10,22 @@ import { BsFillCheckCircleFill } from "react-icons/bs";
 
 const Music = (props) => {
     const [musicList, setMusicList] = useState([])
-    const {setVideoId, setChannelId, searchValue, setSearchValue} = props
+    const {setVideoId, setChannelId, searchValue, setSearchValue, APIKey} = props
     const navigate = useNavigate()
 
     useEffect(() => {
-        axios.get(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=15&regionCode=es&videoCategoryId=10&key=${process.env.REACT_APP_API_KEY}`)
-        .then((result) => {
-            setMusicList(result.data.items)
-        })
-        .catch((err) => {
-            console.log(err)
-        })
+        if(APIKey === ""){
+            navigate('/login')
+        }else{
+            axios.get(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=15&regionCode=us&videoCategoryId=10&key=${APIKey}`)
+            .then((result) => {
+                console.log(result)
+                setMusicList(result.data.items)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        }
     },[])
 
     const clickHandler = (e) => {
@@ -39,7 +44,7 @@ const Music = (props) => {
                     musicList.map((item,index) => (
                         <div onClick={() => clickHandler(item)} className='container' key={index}>
                             <iframe className='video'
-                                src = {`https://www.youtube.com/embed/${item.id}`}
+                                src = {`https://www.youtube.com/embed/${item.id}?control=0`}
                                 title="YouTube video player" frameBorder="0" 
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                                 allowFullScreen>

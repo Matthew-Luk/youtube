@@ -11,7 +11,7 @@ import { BiUserCircle } from "react-icons/bi";
 
 const Navbar = (props) => {
     const navigate = useNavigate()
-    const {searchValue, setSearchValue} = props
+    const {setSearchValue} = props
 
     const homeHandler = (e) => {
         navigate("/home")

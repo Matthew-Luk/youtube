@@ -86,3 +86,7 @@ export function parseHtmlEntities(str) {
         return String.fromCharCode(num)
     })
 }
+
+export function getYear(){
+    return new Date().getFullYear()
+}

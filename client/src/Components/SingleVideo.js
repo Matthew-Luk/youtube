@@ -28,22 +28,20 @@ const SingleVideo = (props) => {
     const [description, setDescription] = useState("")
     const [commentsList, setCommentsList] = useState([])
     const [relatedVideos, setRelatedVideos] = useState([])
-    const {channelId, setChannelId, videoId, setVideoId, searchValue, setSearchValue} = props
+    const {channelId, setChannelId, videoId, setVideoId, searchValue, setSearchValue, APIKey} = props
     const navigate = useNavigate()
 
     let urls = [
         // [0] = video - getting most recent video by channel ID
-        `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=1&order=date&key=${process.env.REACT_APP_API_KEY}`,
+        `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=1&order=date&key=${APIKey}`,
         // [1] = viewcount and statistics
-        `https://youtube.googleapis.com/youtube/v3/videos?part=statistics&id=${videoId}&key=${process.env.REACT_APP_API_KEY}`,
+        `https://youtube.googleapis.com/youtube/v3/videos?part=statistics&id=${videoId}&key=${APIKey}`,
         // [2] = comments for the video should list 25
-        `https://www.googleapis.com/youtube/v3/commentThreads?key=${process.env.REACT_APP_API_KEY}&textFormat=plainText&part=snippet&videoId=${videoId}&maxResults=25`,
+        `https://www.googleapis.com/youtube/v3/commentThreads?key=${APIKey}&textFormat=plainText&part=snippet&videoId=${videoId}&maxResults=25`,
         // [3] = subscriber count
-        `https://youtube.googleapis.com/youtube/v3/channels?part=statistics&id=${channelId}&key=${process.env.REACT_APP_API_KEY}`,
+        `https://youtube.googleapis.com/youtube/v3/channels?part=statistics&id=${channelId}&key=${APIKey}`,
         // [4] = related videos
-        //`https://www.googleapis.com/youtube/v3/search?part=snippet&relatedToVideoId=${videoId}&maxResults=20&key=${process.env.REACT_APP_API_KEY}`
-        //`https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=${videoId}&maxResults=20&key=${process.env.REACT_APP_API_KEY}`
-        `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=20&key=${process.env.REACT_APP_API_KEY}`
+        `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=20&key=${APIKey}`
     ]
     useEffect(() => {
         axios.all(urls.map((url) => axios.get(url)))
@@ -84,7 +82,7 @@ const SingleVideo = (props) => {
             <div className='sv-main'>
                 <div className='sv-container-left'>
                     <iframe className='sv-video'
-                        src = {`https://www.youtube-nocookie.com/embed/${videoId}`}
+                        src = {`https://www.youtube-nocookie.com/embed/${videoId}?&autoplay=1`}
                         title="YouTube video player" frameBorder="0" 
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen>

@@ -11,18 +11,18 @@ import Video7 from './Video7'
 import Video8 from './Video8'
 import Video9 from './Video9'*/
 
-/*<Video2 setChannelId={setChannelId} setVideoId={setVideoId}/>
-<Video3 setChannelId={setChannelId} setVideoId={setVideoId}/>
-<Video4 setChannelId={setChannelId} setVideoId={setVideoId}/>
-<Video6 setChannelId={setChannelId} setVideoId={setVideoId}/>
-<Video5 setChannelId={setChannelId} setVideoId={setVideoId}/>
-<Video7 setChannelId={setChannelId} setVideoId={setVideoId}/>
-<Video8 setChannelId={setChannelId} setVideoId={setVideoId}/>
-<Video9 setChannelId={setChannelId} setVideoId={setVideoId}/>*/
+/*<Video2 setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey}/>
+<Video3 setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey}/>
+<Video4 setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey}/>
+<Video6 setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey}/>
+<Video5 setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey}/>
+<Video7 setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey}/>
+<Video8 setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey}/>
+<Video9 setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey}/>*/
 
 
 const Main = (props) => {
-    const {setChannelId, setVideoId} = props
+    const {setChannelId, setVideoId, APIKey} = props
     const navigate = useNavigate()
     setVideoId("")
 
@@ -74,7 +74,7 @@ const Main = (props) => {
                 </button>
             </div>
             <div className='videos'>
-                <Video1 setChannelId={setChannelId} setVideoId={setVideoId}/>
+                <Video1 setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey}/>
             </div>
         </div>
     )

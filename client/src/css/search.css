@@ -18,6 +18,7 @@
 .search-video-description {
     font-size: 12px;
     color: #606060;
+    margin-top: 24px;
 }
 
 .video-thumbnail {
@@ -36,4 +37,8 @@
 .video-thumbnail img {
     border-radius: 15px;
     transition: 0.3s;
+}
+
+.mt-16 {
+    margin-top: 16px;
 }

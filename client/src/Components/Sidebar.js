@@ -1,5 +1,6 @@
 import React from 'react'
 import '../css/sidebar.css'
+import { getYear } from './functions';
 import { useNavigate } from "react-router-dom";
 import { IconContext } from 'react-icons/lib';
 import { HiHome } from "react-icons/hi";
@@ -179,7 +180,7 @@ const Sidebar = () => {
                     <a href='https://tv.youtube.com/learn/nflsundayticket/'>NFL Sunday Ticket</a>
                 </div>
                 <div className='trademark'>
-                    <a href='https://github.com/Matthew-Luk/youtube'>© 2023 Google LLC x Matthew Luk</a>
+                    <a href='https://github.com/Matthew-Luk/youtube'>© {getYear()} Google LLC x Matthew Luk</a>
                 </div>
             </div>
         </div>

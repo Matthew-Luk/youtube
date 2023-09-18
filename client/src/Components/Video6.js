@@ -12,11 +12,11 @@ const Video6 = (props) => {
     const [video6Title, setVideo6Title] = useState("")
     const [video6Channel, setVideo6Channel] = useState("")
     const [video6ChannelId, setVideo6ChannelId] = useState("")
-    const {setChannelId, setVideoId} = props
+    const {setChannelId, setVideoId, APIKey} = props
     const navigate = useNavigate()
 
     useEffect(() => {
-        axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UC68TLK0mAEzUyHx5x5k-S1Q&maxResults=1&order=date&key=${process.env.REACT_APP_API_KEY}`)
+        axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UC68TLK0mAEzUyHx5x5k-S1Q&maxResults=1&order=date&key=${APIKey}`)
         .then((result) => {
             let video = result.data.items[0]
             setVideo6(video.id.videoId)
