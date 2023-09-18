@@ -8,13 +8,6 @@ import Sidebar from './Sidebar'
 import { IconContext } from 'react-icons/lib';
 import { BsFillCheckCircleFill } from "react-icons/bs";
 
-/*<iframe className='video search-page-left'
-src = {`https://www.youtube.com/embed/${item.id.videoId}`}
-title="YouTube video player" frameBorder="0" 
-allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-allowFullScreen>
-</iframe>*/
-
 const SearchPage = (props) => {
     const {setVideoId, setChannelId, searchValue, setSearchValue, APIKey} = props
     const [searchList, setSearchList] = useState([])
