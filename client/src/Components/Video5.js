@@ -10,6 +10,7 @@ import { BsFillCheckCircleFill } from "react-icons/bs";
 const Video5 = (props) => {
     const [video5, setVideo5] = useState("")
     const [video5Title, setVideo5Title] = useState("")
+    const [video5Img, setVideo5Img] = useState("")
     const [video5Channel, setVideo5Channel] = useState("")
     const [video5ChannelId, setVideo5ChannelId] = useState("")
     const {setChannelId, setVideoId, APIKey} = props
@@ -20,6 +21,7 @@ const Video5 = (props) => {
         .then((result) => {
             let video = result.data.items[0]
             setVideo5(video.id.videoId)
+            setVideo5Img(video.snippet.thumbnails.medium.url)
             setVideo5Title(parseHtmlEntities(video.snippet.title))
             setVideo5Channel(video.snippet.channelTitle)
             setVideo5ChannelId(video.snippet.channelId)
@@ -38,12 +40,9 @@ const Video5 = (props) => {
     
     return (
         <div className='container'>
-            <iframe className='video'
-                src = {`https://www.youtube.com/embed/${video5}`}
-                title="YouTube video player" frameBorder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowFullScreen>
-            </iframe>
+            <div className='video'>
+                <img src = {video5Img} alt='thumbnail for the video'></img>
+            </div>
             <div className='video-description'>
                 <div className='video-description-left'>
                     <img src={mango} className='channel-icon'></img>

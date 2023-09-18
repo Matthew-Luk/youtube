@@ -10,6 +10,7 @@ import { BsFillCheckCircleFill } from "react-icons/bs";
 const Video2 = (props) => {
     const [video2, setVideo2] = useState("")
     const [video2Title, setVideo2Title] = useState("")
+    const [video2Img, setVideo2Img] = useState("")
     const [video2Channel, setVideo2Channel] = useState("")
     const [video2ChannelId, setVideo2ChannelId] = useState("")
     const {setChannelId, setVideoId, APIKey} = props
@@ -20,6 +21,7 @@ const Video2 = (props) => {
         .then((result) => {
             let video = result.data.items[0]
             setVideo2(video.id.videoId)
+            setVideo2Img(video.snippet.thumbnails.medium.url)
             setVideo2Title(parseHtmlEntities(video.snippet.title))
             setVideo2Channel(video.snippet.channelTitle)
             setVideo2ChannelId(video.snippet.channelId)
@@ -38,12 +40,9 @@ const Video2 = (props) => {
     
     return (
         <div className='container'>
-            <iframe className='video'
-                src = {`https://www.youtube.com/embed/${video2}`}
-                title="YouTube video player" frameBorder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowFullScreen>
-            </iframe>
+            <div className='video'>
+                <img src = {video2Img} alt='thumbnail for the video'></img>
+            </div>
             <div className='video-description'>
                 <div className='video-description-left'>
                     <img src={mk} className='channel-icon'></img>

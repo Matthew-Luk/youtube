@@ -5,7 +5,7 @@
     width: 360px;
 }
 
-.video {
+/*.video{
     height: 200px;
     width: 360px;
     border-radius: 15px;
@@ -16,6 +16,20 @@
 .video:hover {
     border-radius: 0px;
     transition: 0.3s;
+}*/
+
+.video img{
+    height: 200px;
+    width: 360px;
+    border-radius: 15px;
+    transition: 0.3s;
+    margin-bottom: 12px;
+}
+
+.video img:hover {
+    border-radius: 0px;
+    transition: 0.3s;
+    cursor: pointer;
 }
 
 .video-description {
@@ -63,7 +77,6 @@
     margin-top: 6px;
     display: flex;
     align-items: center;
-    cursor: pointer;
 }
 
 .channel a:link, .channel a:visited {
