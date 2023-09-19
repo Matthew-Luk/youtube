@@ -9,7 +9,7 @@ import { IconContext } from 'react-icons/lib';
 import { BsFillCheckCircleFill } from "react-icons/bs";
 
 const SearchPage = (props) => {
-    const {setVideoId, setChannelId, searchValue, setSearchValue, APIKey} = props
+    const { setVideoId, setChannelId, searchValue, setSearchValue, APIKey } = props
     const [searchList, setSearchList] = useState([])
     const navigate = useNavigate()
 

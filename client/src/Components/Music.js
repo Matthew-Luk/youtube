@@ -10,7 +10,7 @@ import { BsFillCheckCircleFill } from "react-icons/bs";
 
 const Music = (props) => {
     const [musicList, setMusicList] = useState([])
-    const {setVideoId, setChannelId, searchValue, setSearchValue, APIKey} = props
+    const { setVideoId, setChannelId, searchValue, setSearchValue, APIKey } = props
     const navigate = useNavigate()
 
     useEffect(() => {

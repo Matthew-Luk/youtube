@@ -1,7 +1,7 @@
 import '../App.css';
 import Navbar from './Navbar';
-import {convertCount, convertDate1, convertDate2, parseHtmlEntities} from './functions'
-import React, {useEffect, useState} from 'react'
+import { convertCount, convertDate1, convertDate2, parseHtmlEntities } from './functions'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from "react-router-dom";
 import '../css/singlevideo.css'
 import axios from 'axios'
@@ -28,7 +28,7 @@ const SingleVideo = (props) => {
     const [description, setDescription] = useState("")
     const [commentsList, setCommentsList] = useState([])
     const [relatedVideos, setRelatedVideos] = useState([])
-    const {channelId, setChannelId, videoId, setVideoId, searchValue, setSearchValue, APIKey} = props
+    const { channelId, setChannelId, videoId, setVideoId, searchValue, setSearchValue, APIKey } = props
     const navigate = useNavigate()
 
     let urls = [
@@ -47,6 +47,7 @@ const SingleVideo = (props) => {
         axios.all(urls.map((url) => axios.get(url)))
         .then((result) => {
             // [0]
+            console.log(result)
             let video = result[0].data.items[0]
             setVideoTitle(parseHtmlEntities(video.snippet.title))
             setVideoChannel(video.snippet.channelTitle)
@@ -58,8 +59,7 @@ const SingleVideo = (props) => {
             setLikeCount(convertCount(stats.likeCount))
             setCommentCount(stats.commentCount.toLocaleString("en-US"))
             // [2]
-            let comments = result[2].data.items
-            setCommentsList(comments)
+            setCommentsList(result[2].data.items)
             // [3]
             setSubCount(convertCount(result[3].data.items[0].statistics.subscriberCount))
             // [4]

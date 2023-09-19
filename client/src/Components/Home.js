@@ -6,7 +6,7 @@ import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 
 function Home(props) {
-    const {setChannelId, setVideoId, setSearchValue, APIKey} = props
+    const { setChannelId, setVideoId, setSearchValue, APIKey } = props
     const navigate = useNavigate()
 
     useEffect(() => {
