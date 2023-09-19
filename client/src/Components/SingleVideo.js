@@ -89,7 +89,7 @@ const SingleVideo = (props) => {
                     </iframe>
                     <div className='sv-video-header'>
                         <div className='video-header-top'>
-                            <p className='sv-title'>{videoTitle}</p>
+                            <p className='sv-title'>{parseHtmlEntities(videoTitle)}</p>
                         </div>
                         <div className='video-header-bottom'>
                             <div className='header-bottom-left'>

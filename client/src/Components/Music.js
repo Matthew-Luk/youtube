@@ -19,7 +19,7 @@ const Music = (props) => {
         }else{
             axios.get(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=15&regionCode=us&videoCategoryId=10&key=${APIKey}`)
             .then((result) => {
-                console.log(result)
+                console.log(result.data.nextPageToken)
                 setMusicList(result.data.items)
             })
             .catch((err) => {

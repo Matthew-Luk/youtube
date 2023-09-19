@@ -1,28 +1,28 @@
 import React from 'react'
 import '../css/main.css'
+import jre from '../images/jre.jpg'
+import mk from '../images/mk.jpg'
+import dunkey from '../images/dunkey.jpg'
+import nba from '../images/nba.jpg'
+import mango from '../images/mango.jpg'
+import jeff from '../images/jeff.jpg'
+import theorists from '../images/theorists.jpg'
+import food from '../images/food.jpg'
+import ufc from '../images/ufc.jpg'
 import { useNavigate } from "react-router-dom";
-import Video1 from './Video1'
-/*import Video2 from './Video2'
-import Video3 from './Video3'
-import Video4 from './Video4'
-import Video5 from './Video5'
-import Video6 from './Video6'
-import Video7 from './Video7'
-import Video8 from './Video8'
-import Video9 from './Video9'*/
+import Video from './Video.js'
 
-/*<Video2 setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey}/>
-<Video3 setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey}/>
-<Video4 setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey}/>
-<Video6 setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey}/>
-<Video5 setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey}/>
-<Video7 setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey}/>
-<Video8 setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey}/>
-<Video9 setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey}/>*/
-
+/*<Video setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey} channelId={"UC1bwliGvJogr7cWK0nT2Eag"} Img={mk}/>
+<Video setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey} channelId={"UCsvn_Po0SmunchJYOWpOxMg"} Img={dunkey}/>
+<Video setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey} channelId={"UCWJ2lWNubArHWmf3FIHbfcQ"} Img={nba}/>
+<Video setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey} channelId={"UCLeBjrmfpAFGqDRJNL1PF5g"} Img={mango}/>
+<Video setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey} channelId={"UC68TLK0mAEzUyHx5x5k-S1Q"} Img={jeff}/>
+<Video setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey} channelId={"UCHYoe8kQ-7Gn9ASOlmI0k6Q"} Img={theorists}/>
+<Video setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey} channelId={"UCwiTOchWeKjrJZw7S1H__1g"} Img={food}/>
+<Video setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey} channelId={"UCvgfXK4nTYKudb0rFR6noLA"} Img={ufc}/>*/
 
 const Main = (props) => {
-    const {setChannelId, setVideoId, APIKey} = props
+    const { setChannelId, setVideoId, APIKey } = props
     const navigate = useNavigate()
     setVideoId("")
 
@@ -74,7 +74,7 @@ const Main = (props) => {
                 </button>
             </div>
             <div className='videos'>
-                <Video1 setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey}/>
+                <Video setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey} channelId={"UCzQUP1qoWDoEbmsQxvdjxgQ"} Img={jre}/>
             </div>
         </div>
     )

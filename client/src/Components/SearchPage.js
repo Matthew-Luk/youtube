@@ -16,9 +16,9 @@ const SearchPage = (props) => {
     useEffect(() => {
         axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=15&q=${searchValue}&key=${APIKey}`)
         .then((result) => {
+            console.log(result.data.items)
             setSearchList(result.data.items)
             console.log(searchList)
-            console.log(result.data.items)
         })
         .catch((err) => {
             console.log(err)
