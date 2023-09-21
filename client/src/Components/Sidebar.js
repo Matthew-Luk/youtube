@@ -8,7 +8,7 @@ import { MdSubscriptions } from "react-icons/md";
 import { MdOutlineVideoLibrary } from "react-icons/md";
 import { BsFillFileEarmarkPlayFill } from "react-icons/bs";
 import { AiOutlineFire } from "react-icons/ai";
-import { AiOutlineShopping } from "react-icons/ai";
+import { GiMaterialsScience } from "react-icons/gi";
 import { GrHistory } from "react-icons/gr";
 import { BiCameraMovie } from "react-icons/bi";
 import { RiMusicLine } from "react-icons/ri";
@@ -28,15 +28,18 @@ const Sidebar = (props) => {
 
     const categoryHandler = (e) => {
         const key = {
-            "cars": 2,
+            "trending": 0,
+            "autos": 2,
             "music": 10,
             "animals": 15,
             "sports": 17,
             "gaming": 20,
             "podcasts": 21,
             "entertainment": 24,
-            "news": 25
+            "news": 25,
+            "science": 28
         }
+        console.log(e.target.value)
         if(e.target.value === undefined){
             setSbCategory(key[e.target.parentElement.value])
             navigate(`/category/${e.target.parentElement.value}`)
@@ -88,17 +91,11 @@ const Sidebar = (props) => {
             </div>
             <div className='sidebar-container'>
                 <p className='explore'>Explore</p>
-                <button className='element'>
+                <button onClick={categoryHandler} value={'trending'} className={document.URL.includes("trending")? "element selected": "element"}>
                     <IconContext.Provider value={{className: "icon"}}>
                         <AiOutlineFire />
                     </IconContext.Provider>
                     <p className='element-text'>Trending</p>
-                </button>
-                <button className='element'>
-                    <IconContext.Provider value={{className: "icon"}}>
-                        <AiOutlineShopping />
-                    </IconContext.Provider>
-                    <p className='element-text'>Shopping</p>
                 </button>
                 <button onClick={categoryHandler} value={'music'} className={document.URL.includes("music")? "element selected": "element"}>
                     <IconContext.Provider value={{className: "icon"}}>
@@ -106,17 +103,11 @@ const Sidebar = (props) => {
                     </IconContext.Provider>
                     <p className='element-text'>Music</p>
                 </button>
-                <button onClick={categoryHandler} value={'entertainment'} className={document.URL.includes("movies")? "element selected": "element"}>
+                <button onClick={categoryHandler} value={'entertainment'} className={document.URL.includes("entertainment")? "element selected": "element"}>
                     <IconContext.Provider value={{className: "icon"}}>
                         <BiCameraMovie />
                     </IconContext.Provider>
                     <p className='element-text'>Entertainment</p>
-                </button>
-                <button onClick={categoryHandler} value={'animals'} className={document.URL.includes("animals")? "element selected": "element"}>
-                    <IconContext.Provider value={{className: "icon"}}>
-                        <LuDog />
-                    </IconContext.Provider>
-                    <p className='element-text'>Animals</p>
                 </button>
                 <button onClick={categoryHandler} value={'gaming'} className={document.URL.includes("gaming")? "element selected": "element"}>
                     <IconContext.Provider value={{className: "icon"}}>
@@ -136,11 +127,23 @@ const Sidebar = (props) => {
                     </IconContext.Provider>
                     <p className='element-text'>Sports</p>
                 </button>
-                <button onClick={categoryHandler} value={'cars'} className={document.URL.includes("sports")? "element selected": "element"}>
+                <button onClick={categoryHandler} value={'animals'} className={document.URL.includes("animals")? "element selected": "element"}>
+                    <IconContext.Provider value={{className: "icon"}}>
+                        <LuDog />
+                    </IconContext.Provider>
+                    <p className='element-text'>Animals</p>
+                </button>
+                <button onClick={categoryHandler} value={'autos'} className={document.URL.includes("autos")? "element selected": "element"}>
                     <IconContext.Provider value={{className: "icon"}}>
                         <AiOutlineCar />
                     </IconContext.Provider>
                     <p className='element-text'>Autos & Vehicles</p>
+                </button>
+                <button onClick={categoryHandler} value={'science'} className={document.URL.includes("science")? "element selected": "element"}>
+                    <IconContext.Provider value={{className: "icon"}}>
+                        <GiMaterialsScience />
+                    </IconContext.Provider>
+                    <p className='element-text'>Science & Tech</p>
                 </button>
             </div>
             <div className='sidebar-container'>

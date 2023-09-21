@@ -28,7 +28,7 @@ const Login = (props) => {
 
     return (
         <div className='login-container'>
-            <form onSubmit={submitHandler} className='login-form'>
+            <div onSubmit={submitHandler} className='login-form'>
                 <div className='login-form-header'>
                     <p>Please Input Your YouTube Data API Key</p>
                 </div>
@@ -48,7 +48,7 @@ const Login = (props) => {
                         </div>
                     </label>
                 </div>
-            </form>
+            </div>
         </div>
     )
 }
