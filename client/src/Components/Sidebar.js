@@ -12,21 +12,38 @@ import { AiOutlineShopping } from "react-icons/ai";
 import { GrHistory } from "react-icons/gr";
 import { BiCameraMovie } from "react-icons/bi";
 import { RiMusicLine } from "react-icons/ri";
-import { BsBroadcast } from "react-icons/bs";
+import { LuDog } from "react-icons/lu";
 import { IoGameControllerOutline } from "react-icons/io5";
 import { IoNewspaperOutline } from "react-icons/io5";
 import { AiOutlineTrophy } from "react-icons/ai";
-import { MdOutlinePodcasts } from "react-icons/md";
+import { AiOutlineCar } from "react-icons/ai";
 import { AiOutlineSetting } from "react-icons/ai";
 import { CiFlag1 } from "react-icons/ci";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { BsPatchExclamation } from "react-icons/bs";
 
-const Sidebar = () => {
+const Sidebar = (props) => {
+    const { sbCategory, setSbCategory } = props
     const navigate = useNavigate()
 
-    const musicHandler = (e) => {
-        navigate('/music')
+    const categoryHandler = (e) => {
+        const key = {
+            "cars": 2,
+            "music": 10,
+            "animals": 15,
+            "sports": 17,
+            "gaming": 20,
+            "podcasts": 21,
+            "entertainment": 24,
+            "news": 25
+        }
+        if(e.target.value === undefined){
+            setSbCategory(key[e.target.parentElement.value])
+            navigate(`/category/${e.target.parentElement.value}`)
+        }else{
+            setSbCategory(key[e.target.value])
+            navigate(`/category/${e.target.value}`)
+        }
     }
 
     const homeHandler = (e) => {
@@ -83,47 +100,47 @@ const Sidebar = () => {
                     </IconContext.Provider>
                     <p className='element-text'>Shopping</p>
                 </button>
-                <button onClick={musicHandler} className={document.URL.includes("music")? "element selected": "element"}>
+                <button onClick={categoryHandler} value={'music'} className={document.URL.includes("music")? "element selected": "element"}>
                     <IconContext.Provider value={{className: "icon"}}>
                         <RiMusicLine />
                     </IconContext.Provider>
                     <p className='element-text'>Music</p>
                 </button>
-                <button className='element'>
+                <button onClick={categoryHandler} value={'entertainment'} className={document.URL.includes("movies")? "element selected": "element"}>
                     <IconContext.Provider value={{className: "icon"}}>
                         <BiCameraMovie />
                     </IconContext.Provider>
-                    <p className='element-text'>Movies & TV</p>
+                    <p className='element-text'>Entertainment</p>
                 </button>
-                <button className='element'>
+                <button onClick={categoryHandler} value={'animals'} className={document.URL.includes("animals")? "element selected": "element"}>
                     <IconContext.Provider value={{className: "icon"}}>
-                        <BsBroadcast />
+                        <LuDog />
                     </IconContext.Provider>
-                    <p className='element-text'>Live</p>
+                    <p className='element-text'>Animals</p>
                 </button>
-                <button className='element'>
+                <button onClick={categoryHandler} value={'gaming'} className={document.URL.includes("gaming")? "element selected": "element"}>
                     <IconContext.Provider value={{className: "icon"}}>
                         <IoGameControllerOutline />
                     </IconContext.Provider>
                     <p className='element-text'>Gaming</p>
                 </button>
-                <button className='element'>
+                <button onClick={categoryHandler} value={'news'} className={document.URL.includes("news")? "element selected": "element"}>
                     <IconContext.Provider value={{className: "icon"}}>
                         <IoNewspaperOutline />
                     </IconContext.Provider>
                     <p className='element-text'>News</p>
                 </button>
-                <button className='element'>
+                <button onClick={categoryHandler} value={'sports'} className={document.URL.includes("sports")? "element selected": "element"}>
                     <IconContext.Provider value={{className: "icon"}}>
                         <AiOutlineTrophy />
                     </IconContext.Provider>
                     <p className='element-text'>Sports</p>
                 </button>
-                <button className='element'>
+                <button onClick={categoryHandler} value={'cars'} className={document.URL.includes("sports")? "element selected": "element"}>
                     <IconContext.Provider value={{className: "icon"}}>
-                        <MdOutlinePodcasts />
+                        <AiOutlineCar />
                     </IconContext.Provider>
-                    <p className='element-text'>Podcasts</p>
+                    <p className='element-text'>Autos & Vehicles</p>
                 </button>
             </div>
             <div className='sidebar-container'>

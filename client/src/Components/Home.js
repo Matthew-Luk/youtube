@@ -6,7 +6,7 @@ import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 
 function Home(props) {
-    const { setChannelId, setVideoId, setSearchValue, APIKey } = props
+    const { setChannelId, setVideoId, setSearchValue, APIKey, sbCategory, setSbCategory } = props
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -18,7 +18,7 @@ function Home(props) {
     return (
         <div className="home">
             <Navbar setSearchValue={setSearchValue}/>
-            <Sidebar/>
+            <Sidebar sbCategory={sbCategory} setSbCategory={setSbCategory}/>
             <Main setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey}/>
         </div>
     );

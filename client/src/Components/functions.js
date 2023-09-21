@@ -77,7 +77,7 @@ export function convertDate2(publishedDate){
     }
 }
 
-export function parseHtmlEntities(str) {
+export function parseHtmlEntities(str){
     str = str.replace("&amp;", "&")
     str = str.replace("quot;", '"')
     str = str.replace("&quot;", '"')
@@ -89,4 +89,17 @@ export function parseHtmlEntities(str) {
 
 export function getYear(){
     return new Date().getFullYear()
+}
+
+export function adjustDescription(str){
+    if(str.length > 99){
+        for(let i=100;i<str.length;i++){
+            if(str[i] === " "){
+                return str.slice(0,i) + "..."
+            }
+        }
+        return str
+    }else{
+        return str
+    }
 }

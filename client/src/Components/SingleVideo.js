@@ -1,6 +1,6 @@
 import '../App.css';
 import Navbar from './Navbar';
-import { convertCount, convertDate1, convertDate2, parseHtmlEntities } from './functions'
+import { convertCount, convertDate1, convertDate2, parseHtmlEntities, adjustDescription } from './functions'
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from "react-router-dom";
 import '../css/singlevideo.css'
@@ -32,8 +32,8 @@ const SingleVideo = (props) => {
     const navigate = useNavigate()
 
     let urls = [
-        // [0] = video - getting most recent video by channel ID
-        `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=1&order=date&key=${APIKey}`,
+        // [0] = video - getting video by video ID
+        `https://youtube.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=${APIKey}`,
         // [1] = viewcount and statistics
         `https://youtube.googleapis.com/youtube/v3/videos?part=statistics&id=${videoId}&key=${APIKey}`,
         // [2] = comments for the video should list 25
@@ -51,7 +51,7 @@ const SingleVideo = (props) => {
             let video = result[0].data.items[0]
             setVideoTitle(parseHtmlEntities(video.snippet.title))
             setVideoChannel(video.snippet.channelTitle)
-            setDescription(video.snippet.description)
+            setDescription(adjustDescription(video.snippet.description))
             setPublishedAt(convertDate1(video.snippet.publishedAt))
             // [1]
             let stats = result[1].data.items[0].statistics

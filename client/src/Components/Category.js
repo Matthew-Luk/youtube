@@ -8,25 +8,24 @@ import Sidebar from './Sidebar'
 import { IconContext } from 'react-icons/lib';
 import { BsFillCheckCircleFill } from "react-icons/bs";
 
-const Music = (props) => {
-    const [musicList, setMusicList] = useState([])
-    const { setVideoId, setChannelId, searchValue, setSearchValue, APIKey } = props
+const Category = (props) => {
+    const [videoList, setVideoList] = useState([])
+    const { setVideoId, setChannelId, searchValue, setSearchValue, APIKey, sbCategory, setSbCategory } = props
     const navigate = useNavigate()
 
     useEffect(() => {
         if(APIKey === ""){
             navigate('/login')
         }else{
-            axios.get(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=15&regionCode=us&videoCategoryId=10&key=${APIKey}`)
+            axios.get(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=15&regionCode=us&videoCategoryId=${sbCategory}&key=${APIKey}`)
             .then((result) => {
-                console.log(result.data.nextPageToken)
-                setMusicList(result.data.items)
+                setVideoList(result.data.items)
             })
             .catch((err) => {
                 console.log(err)
             })
         }
-    },[])
+    },[sbCategory])
 
     const clickHandler = (e) => {
         setChannelId(e.snippet.channelId)
@@ -37,11 +36,11 @@ const Music = (props) => {
     return (
         <div className='home'>
             <Navbar searchValue={searchValue} setSearchValue={setSearchValue}/>
-            <Sidebar/>
+            <Sidebar sbCategory={sbCategory} setSbCategory={setSbCategory}/>
             <div className='main'>
                 <div className='videos mt-80'>
                 {
-                    musicList.map((item,index) => (
+                    videoList.map((item,index) => (
                         <div className='container' key={index}>
                             <div onClick={() => clickHandler(item)} className='video'>
                                 <img src = {item.snippet.thumbnails.medium.url} alt='thumbnail for the video'></img>
@@ -70,4 +69,4 @@ const Music = (props) => {
     )
 }
 
-export default Music
+export default Category
