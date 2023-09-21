@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "@ionic/react": "^7.0.5",
-    "express": "^4.18.2",
-    "ionicons": "^7.1.0",
-    "mongoose": "^7.1.0"
-  }
-}
