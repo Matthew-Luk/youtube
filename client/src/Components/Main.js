@@ -29,7 +29,7 @@ const Main = (props) => {
 
     const categoryHandler = (e) => {
         console.log(e)
-        //navigate('/music')
+        navigate('/category/music')
     }
 
     return (

@@ -28,7 +28,7 @@ const SingleVideo = (props) => {
     const [description, setDescription] = useState("")
     const [commentsList, setCommentsList] = useState([])
     const [relatedVideos, setRelatedVideos] = useState([])
-    const { channelId, setChannelId, videoId, setVideoId, searchValue, setSearchValue, APIKey } = props
+    const { channelId, setChannelId, videoId, setVideoId, searchValue, setSearchValue, APIKey, history, setHistory } = props
     const navigate = useNavigate()
 
     let urls = [
@@ -44,6 +44,7 @@ const SingleVideo = (props) => {
         `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=20&key=${APIKey}`
     ]
     useEffect(() => {
+        setHistory([videoId, ...history])
         axios.all(urls.map((url) => axios.get(url)))
         .then((result) => {
             // [0]

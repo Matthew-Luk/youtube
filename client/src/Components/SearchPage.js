@@ -40,28 +40,26 @@ const SearchPage = (props) => {
             <Navbar searchValue={searchValue} setSearchValue={setSearchValue}/>
             <Sidebar/>
             <div className='main'>
-                <div>
-                    {
-                        searchList.map((item,index) => (
-                            <div onClick={() => clickHandler(item)} className='search-video' key={index}>
-                                <div className='video-thumbnail'>
-                                    <img src = {item.snippet.thumbnails.medium.url} alt='thumbnail for the video'></img>
-                                </div>
-                                <div className='search-page-description'>
-                                    <p className='search-page-title'>{parseHtmlEntities(item.snippet.title)}</p>
-                                    <p className=''>{convertDate2(item.snippet.publishedAt)}</p>
-                                    <div className='channel mt-16'>
-                                        <a href={`https://www.youtube.com/channel/${item.snippet.channelId}`}>{item.snippet.channelTitle}</a>
-                                        <IconContext.Provider value={{ className: "checkmark"}}>
-                                            <BsFillCheckCircleFill />
-                                        </IconContext.Provider>
-                                    </div>
-                                    <p className='search-video-description'>{item.snippet.description}</p>
-                                </div>
+                {
+                    searchList.map((item,index) => (
+                        <div onClick={() => clickHandler(item)} className='search-video' key={index}>
+                            <div className='video-thumbnail'>
+                                <img src={item.snippet.thumbnails.medium.url} alt='thumbnail for the video'></img>
                             </div>
-                        ))
-                    }
-                </div>
+                            <div className='search-page-description'>
+                                <p className='search-page-title'>{parseHtmlEntities(item.snippet.title)}</p>
+                                <p className=''>{convertDate2(item.snippet.publishedAt)}</p>
+                                <div className='channel mt-16'>
+                                    <a href={`https://www.youtube.com/channel/${item.snippet.channelId}`}>{item.snippet.channelTitle}</a>
+                                    <IconContext.Provider value={{ className: "checkmark"}}>
+                                        <BsFillCheckCircleFill />
+                                    </IconContext.Provider>
+                                </div>
+                                <p className='search-video-description'>{item.snippet.description}</p>
+                            </div>
+                        </div>
+                    ))
+                }
             </div>
         </div>
     )

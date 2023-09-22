@@ -53,6 +53,10 @@ const Sidebar = (props) => {
         navigate("/home")
     }
 
+    const historyHandler = (e) => {
+        navigate("/history")
+    }
+
     return (
         <div className='sidebar'>
             <div className='sidebar-container'>
@@ -82,7 +86,7 @@ const Sidebar = (props) => {
                     </IconContext.Provider>
                     <p className='element-text'>Library</p>
                 </button>
-                <button className='element'>
+                <button onClick={historyHandler} value={'history'} className={document.URL.includes("history")? "element selected": "element"}>
                     <IconContext.Provider value={{className: "icon"}}>
                         <GrHistory />
                     </IconContext.Provider>
