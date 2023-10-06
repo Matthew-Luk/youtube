@@ -12,15 +12,7 @@ import ufc from '../images/ufc.jpg'
 import { useNavigate } from "react-router-dom";
 import Video from './Video.js'
 
-/*<Video setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey} channel={"UCzQUP1qoWDoEbmsQxvdjxgQ"} Img={jre}/>
-<Video setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey} channel={"UC1bwliGvJogr7cWK0nT2Eag"} Img={mk}/>
-<Video setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey} channel={"UCsvn_Po0SmunchJYOWpOxMg"} Img={dunkey}/>
-<Video setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey} channel={"UCWJ2lWNubArHWmf3FIHbfcQ"} Img={nba}/>
-<Video setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey} channel={"UCLeBjrmfpAFGqDRJNL1PF5g"} Img={mango}/>
-<Video setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey} channel={"UC68TLK0mAEzUyHx5x5k-S1Q"} Img={jeff}/>
-<Video setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey} channel={"UCHYoe8kQ-7Gn9ASOlmI0k6Q"} Img={theorists}/>
-<Video setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey} channel={"UCwiTOchWeKjrJZw7S1H__1g"} Img={food}/>
-<Video setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey} channel={"UCvgfXK4nTYKudb0rFR6noLA"} Img={ufc}/>*/
+
 
 const Main = (props) => {
     const { setChannelId, setVideoId, APIKey } = props
@@ -76,6 +68,15 @@ const Main = (props) => {
                 </button>
             </div>
             <div className='videos'>
+                <Video setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey} channel={"UCzQUP1qoWDoEbmsQxvdjxgQ"} Img={jre}/>
+                <Video setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey} channel={"UC1bwliGvJogr7cWK0nT2Eag"} Img={mk}/>
+                <Video setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey} channel={"UCsvn_Po0SmunchJYOWpOxMg"} Img={dunkey}/>
+                <Video setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey} channel={"UCWJ2lWNubArHWmf3FIHbfcQ"} Img={nba}/>
+                <Video setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey} channel={"UCLeBjrmfpAFGqDRJNL1PF5g"} Img={mango}/>
+                <Video setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey} channel={"UC68TLK0mAEzUyHx5x5k-S1Q"} Img={jeff}/>
+                <Video setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey} channel={"UCHYoe8kQ-7Gn9ASOlmI0k6Q"} Img={theorists}/>
+                <Video setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey} channel={"UCwiTOchWeKjrJZw7S1H__1g"} Img={food}/>
+                <Video setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey} channel={"UCvgfXK4nTYKudb0rFR6noLA"} Img={ufc}/>
             </div>
         </div>
     )

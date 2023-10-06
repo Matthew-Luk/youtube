@@ -21,14 +21,14 @@ const Login = (props) => {
         })
     }
 
-    const envHandler = (e) => {
-        setAPIKey(process.env.REACT_APP_API_KEY)
-        navigate('/home')
-    }
+    // const envHandler = (e) => {
+    //     setAPIKey(process.env.REACT_APP_API_KEY)
+    //     navigate('/home')
+    // }
 
     return (
         <div className='login-container'>
-            <div onSubmit={submitHandler} className='login-form'>
+            <form onSubmit={submitHandler} className='login-form'>
                 <div className='login-form-header'>
                     <p>Please Input Your YouTube Data API Key</p>
                 </div>
@@ -42,13 +42,13 @@ const Login = (props) => {
                         API Key:
                         <input type={"password"}></input>
                         <div className='login-form-buttons'>
-                            <button className='login-button'>OK</button>
-                            <button onClick={envHandler} className='login-button'>Use env</button>
-                            <button className='login-button'>Cancel</button>
+                            <button type="submit" className='login-button'>OK</button>
+                            {/* <button onClick={envHandler} className='login-button'>Use env</button> */}
+                            <a href='https://matthewluk.netlify.app'><button className='login-button'>Cancel</button></a>
                         </div>
                     </label>
                 </div>
-            </div>
+            </form>
         </div>
     )
 }
