@@ -22,11 +22,11 @@ function App() {
         <Routes>
           <Route path="/" element={<Navigate to = "/login"/>}/>
           <Route path="/login" element={<Login setAPIKey={setAPIKey}/>}/>
-          <Route path="/home" element={<Home setChannelId={setChannelId} setVideoId={setVideoId} setSearchValue={setSearchValue} APIKey={APIKey} sbCategory={sbCategory} setSbCategory={setSbCategory}/>}/>
+          <Route path="/home" element={<Home setChannelId={setChannelId} setVideoId={setVideoId} setSearchValue={setSearchValue} APIKey={APIKey} setSbCategory={setSbCategory}/>}/>
           <Route path='/video/:videoId' element={<SingleVideo channelId={channelId} videoId={videoId} setChannelId={setChannelId} setVideoId={setVideoId} searchValue={searchValue} setSearchValue={setSearchValue} APIKey={APIKey} history={history} setHistory={setHistory}/>}/>
           <Route path='/category/:category' element={<Category setVideoId={setVideoId} setChannelId={setChannelId} searchValue={searchValue} setSearchValue={setSearchValue} APIKey={APIKey} sbCategory={sbCategory} setSbCategory={setSbCategory}/>}/>
           <Route path='/search/:searchValue' element={<SearchPage setVideoId={setVideoId} setChannelId={setChannelId} searchValue={searchValue} setSearchValue={setSearchValue} APIKey={APIKey}/>}/>
-          <Route path='/history' element={<History APIKey={APIKey} history={history} setHistory={setHistory} sbCategory={sbCategory} setSbCategory={setSbCategory}/>}/>
+          <Route path='/history' element={<History APIKey={APIKey} history={history} sbCategory={sbCategory} setSbCategory={setSbCategory}/>}/>
         </Routes>
       </BrowserRouter>
     </div>

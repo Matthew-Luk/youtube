@@ -10,7 +10,7 @@ import { BsFillCheckCircleFill } from "react-icons/bs";
 
 const History = (props) => {
     const [videoList, setVideoList] = useState([])
-    const { setVideoId, setChannelId, searchValue, setSearchValue, APIKey, sbCategory, setSbCategory, history, setHistory } = props
+    const { setVideoId, setChannelId, searchValue, setSearchValue, APIKey, sbCategory, setSbCategory, history } = props
     const navigate = useNavigate()
 
     useEffect(() => {

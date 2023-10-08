@@ -23,7 +23,7 @@ import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { BsPatchExclamation } from "react-icons/bs";
 
 const Sidebar = (props) => {
-    const { sbCategory, setSbCategory } = props
+    const { setSbCategory } = props
     const navigate = useNavigate()
 
     const categoryHandler = (e) => {
@@ -53,8 +53,8 @@ const Sidebar = (props) => {
         navigate("/home")
     }
 
-    const historyHandler = (e) => {
-        navigate("/history")
+    const feedbackHandler = (e) => {
+        window.location = 'mailto:matthew.luk@yahoo.com?subject=Feedback%20-%20ML%20Youtube'
     }
 
     return (
@@ -86,7 +86,7 @@ const Sidebar = (props) => {
                     </IconContext.Provider>
                     <p className='element-text'>Library</p>
                 </button>
-                <button onClick={historyHandler} value={'history'} className={document.URL.includes("history")? "element selected": "element"}>
+                <button onClick={categoryHandler} value={'history'} className={document.URL.includes("history")? "element selected": "element"}>
                     <IconContext.Provider value={{className: "icon"}}>
                         <GrHistory />
                     </IconContext.Provider>
@@ -173,7 +173,8 @@ const Sidebar = (props) => {
                     <IconContext.Provider value={{className: "icon"}}>
                         <BsPatchExclamation />
                     </IconContext.Provider>
-                    <p className='element-text'>Send feedback</p>
+                    {/* <a href='mailto:matthew.luk@yahoo.com?subject=Give%20me%20all%20your%20bitcoins'></a> */}
+                    <p onClick={feedbackHandler} className='element-text'>Send feedback</p>
                 </button>
             </div>
             <div className='sidebar-container footer'>

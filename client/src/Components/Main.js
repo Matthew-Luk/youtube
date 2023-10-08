@@ -12,8 +12,6 @@ import ufc from '../images/ufc.jpg'
 import { useNavigate } from "react-router-dom";
 import Video from './Video.js'
 
-
-
 const Main = (props) => {
     const { setChannelId, setVideoId, APIKey } = props
     const navigate = useNavigate()

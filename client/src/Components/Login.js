@@ -26,6 +26,10 @@ const Login = (props) => {
     //     navigate('/home')
     // }
 
+    const cancelHandler = (e) => {
+        window.location = 'https://matthewluk.netlify.app/'
+    }
+
     return (
         <div className='login-container'>
             <form onSubmit={submitHandler} className='login-form'>
@@ -44,7 +48,7 @@ const Login = (props) => {
                         <div className='login-form-buttons'>
                             <button type="submit" className='login-button'>OK</button>
                             {/* <button onClick={envHandler} className='login-button'>Use env</button> */}
-                            <a href='https://matthewluk.netlify.app'><button className='login-button'>Cancel</button></a>
+                            <button onClick={cancelHandler} className='login-button'>Cancel</button>
                         </div>
                     </label>
                 </div>
