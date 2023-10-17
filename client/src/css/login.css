@@ -78,3 +78,11 @@
 .login-error {
     color: red;
 }
+
+.instruction {
+    height: 20px;
+}
+
+.width120 {
+    width: 120px;
+}

@@ -21,13 +21,17 @@ const Login = (props) => {
         })
     }
 
-    // const envHandler = (e) => {
+    // const envHandler = () => {
     //     setAPIKey(process.env.REACT_APP_API_KEY)
     //     navigate('/home')
     // }
 
-    const cancelHandler = (e) => {
+    const cancelHandler = () => {
         window.location = 'https://matthewluk.netlify.app/'
+    }
+
+    const instructionHandler = () => {
+        window.location = 'https://www.youtube.com/watch?v=N18czV5tj5o'
     }
 
     return (
@@ -51,6 +55,9 @@ const Login = (props) => {
                             <button onClick={cancelHandler} className='login-button'>Cancel</button>
                         </div>
                     </label>
+                    <div className='instruction'>
+                        <button onClick={instructionHandler} className='login-button width120'>How to get API Key?</button>
+                    </div>
                 </div>
             </form>
         </div>
