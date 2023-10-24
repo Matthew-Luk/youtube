@@ -16,6 +16,7 @@ const Login = (props) => {
             navigate('/home')
         })
         .catch((err) => {
+            console.log(err)
             setError("Please input a valid YouTube data API.")
             navigate('/login')
         })
