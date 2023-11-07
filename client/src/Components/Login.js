@@ -32,7 +32,7 @@ const Login = (props) => {
     }
 
     const instructionHandler = () => {
-        window.location = 'https://www.youtube.com/watch?v=N18czV5tj5o'
+        window.open('https://www.youtube.com/watch?v=N18czV5tj5o')
     }
 
     return (

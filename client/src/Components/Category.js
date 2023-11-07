@@ -52,7 +52,7 @@ const Category = (props) => {
                                 <div className='video-description-right'>
                                     <p onClick={() => clickHandler(item)} className='title'>{item.snippet.title}</p>
                                     <div className='channel'>
-                                        <a href={`https://www.youtube.com/channel/${item.snippet.channelId}`}>{item.snippet.channelTitle}</a>
+                                        <a href={`https://www.youtube.com/channel/${item.snippet.channelId}`} target="_blank" rel="noreferrer">{item.snippet.channelTitle}</a>
                                         <IconContext.Provider value={{ className: "checkmark"}}>
                                             <BsFillCheckCircleFill />
                                         </IconContext.Provider>

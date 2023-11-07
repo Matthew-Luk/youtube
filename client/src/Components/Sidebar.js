@@ -179,33 +179,33 @@ const Sidebar = (props) => {
             </div>
             <div className='sidebar-container footer'>
                 <div className='footer-line'>
-                    <a href='https://about.youtube/'>About</a>
-                    <a href='https://blog.youtube/'>Press</a>
-                    <a href='https://www.youtube.com/howyoutubeworks/policies/copyright/'>Copyright</a>
+                    <a href='https://about.youtube/' target="_blank" rel="noreferrer">About</a>
+                    <a href='https://blog.youtube/' target="_blank" rel="noreferrer">Press</a>
+                    <a href='https://www.youtube.com/howyoutubeworks/policies/copyright/' target="_blank" rel="noreferrer">Copyright</a>
                 </div>
                 <div className='footer-line'>
-                    <a href='https://www.youtube.com/t/contact_us/'>Contact us</a>
-                    <a href='https://www.youtube.com/creators/'>Creators</a>
+                    <a href='https://www.youtube.com/t/contact_us/' target="_blank" rel="noreferrer">Contact us</a>
+                    <a href='https://www.youtube.com/creators/' target="_blank" rel="noreferrer">Creators</a>
                 </div>
                 <div className='footer-line mb-12'>
-                    <a href='https://www.youtube.com/ads/'>Advertise</a>
-                    <a href='https://developers.google.com/youtube'>Developers</a>
+                    <a href='https://www.youtube.com/ads/' target="_blank" rel="noreferrer">Advertise</a>
+                    <a href='https://developers.google.com/youtube' target="_blank" rel="noreferrer">Developers</a>
                 </div>
                 <div className='footer-line'>
-                    <a href='https://www.youtube.com/t/terms'>Terms</a>
-                    <a href='https://policies.google.com/u/2/privacy?hl=en'>Policy & Safety</a>
+                    <a href='https://www.youtube.com/t/terms' target="_blank" rel="noreferrer">Terms</a>
+                    <a href='https://policies.google.com/u/2/privacy?hl=en' target="_blank" rel="noreferrer">Policy & Safety</a>
                 </div>
                 <div className='footer-line'>
-                    <a href='https://www.youtube.com/howyoutubeworks/?utm_campaign=ytgen&utm_source=ythp&utm_medium=LeftNav&utm_content=txt&u=https%3A%2F%2Fwww.youtube.com%2Fhowyoutubeworks%3Futm_source%3Dythp%26utm_medium%3DLeftNav%26utm_campaign%3Dytgen'>How YouTube works</a>
+                    <a href='https://www.youtube.com/howyoutubeworks/?utm_campaign=ytgen&utm_source=ythp&utm_medium=LeftNav&utm_content=txt&u=https%3A%2F%2Fwww.youtube.com%2Fhowyoutubeworks%3Futm_source%3Dythp%26utm_medium%3DLeftNav%26utm_campaign%3Dytgen' target="_blank" rel="noreferrer">How YouTube works</a>
                 </div>
                 <div className='footer-line'>
-                    <a href='https://www.youtube.com/new'>Test new features</a>
+                    <a href='https://www.youtube.com/new' target="_blank" rel="noreferrer">Test new features</a>
                 </div>
                 <div className='footer-line mb-12'>
-                    <a href='https://tv.youtube.com/learn/nflsundayticket/'>NFL Sunday Ticket</a>
+                    <a href='https://tv.youtube.com/learn/nflsundayticket/' target="_blank" rel="noreferrer">NFL Sunday Ticket</a>
                 </div>
                 <div className='trademark'>
-                    <a href='https://github.com/Matthew-Luk/youtube'>© {getYear()} Google LLC x Matthew Luk</a>
+                    <a href='https://github.com/Matthew-Luk/youtube' target="_blank" rel="noreferrer">© {getYear()} Google LLC x Matthew Luk</a>
                 </div>
             </div>
         </div>

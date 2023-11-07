@@ -54,7 +54,7 @@ const History = (props) => {
                                 <div className='video-description-right'>
                                     <p onClick={() => clickHandler(item)} className='title'>{item.data.items[0].snippet.title}</p>
                                     <div className='channel'>
-                                        <a href={`https://www.youtube.com/channel/${item.data.items[0].snippet.channelId}`}>{item.data.items[0].snippet.channelTitle}</a>
+                                        <a href={`https://www.youtube.com/channel/${item.data.items[0].snippet.channelId}`} target="_blank" rel="noreferrer">{item.data.items[0].snippet.channelTitle}</a>
                                         <IconContext.Provider value={{ className: "checkmark"}}>
                                             <BsFillCheckCircleFill />
                                         </IconContext.Provider>

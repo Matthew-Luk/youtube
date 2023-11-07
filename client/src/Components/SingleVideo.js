@@ -97,7 +97,7 @@ const SingleVideo = (props) => {
                                 <img src={youtubelogo} alt='youtube logo' className='sv-channel-icon'></img>
                                 <div className='sv-channel'>
                                     <div>
-                                        <a href={`https://www.youtube.com/channel/${channelId}`}>{videoChannel}</a>
+                                        <a href={`https://www.youtube.com/channel/${channelId}`} target="_blank" rel="noreferrer">{videoChannel}</a>
                                         <IconContext.Provider value={{ className: "checkmark"}}>
                                             <BsFillCheckCircleFill />
                                         </IconContext.Provider>

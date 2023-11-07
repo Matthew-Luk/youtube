@@ -50,7 +50,7 @@ const SearchPage = (props) => {
                                 <p className='search-page-title'>{parseHtmlEntities(item.snippet.title)}</p>
                                 <p className=''>{convertDate2(item.snippet.publishedAt)}</p>
                                 <div className='channel mt-16'>
-                                    <a href={`https://www.youtube.com/channel/${item.snippet.channelId}`}>{item.snippet.channelTitle}</a>
+                                    <a href={`https://www.youtube.com/channel/${item.snippet.channelId}`} target="_blank" rel="noreferrer">{item.snippet.channelTitle}</a>
                                     <IconContext.Provider value={{ className: "checkmark"}}>
                                         <BsFillCheckCircleFill />
                                     </IconContext.Provider>

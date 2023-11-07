@@ -49,7 +49,7 @@ const Video = (props) => {
                 <div className='video-description-right'>
                     <p onClick={clickHandler} className='title'>{videoTitle}</p>
                     <div className='channel'>
-                        <a href={`https://www.youtube.com/channel/${videoChannelId}`}>{videoChannel}</a>
+                        <a href={`https://www.youtube.com/channel/${videoChannelId}`} target="_blank" rel="noreferrer">{videoChannel}</a>
                         <IconContext.Provider value={{ className: "checkmark"}}>
                             <BsFillCheckCircleFill />
                         </IconContext.Provider>
