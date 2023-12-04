@@ -26,7 +26,7 @@ function App() {
           <Route path='/video/:videoId' element={<SingleVideo channelId={channelId} videoId={videoId} setChannelId={setChannelId} setVideoId={setVideoId} searchValue={searchValue} setSearchValue={setSearchValue} APIKey={APIKey} history={history} setHistory={setHistory}/>}/>
           <Route path='/category/:category' element={<Category setVideoId={setVideoId} setChannelId={setChannelId} searchValue={searchValue} setSearchValue={setSearchValue} APIKey={APIKey} sbCategory={sbCategory} setSbCategory={setSbCategory}/>}/>
           <Route path='/search/:searchValue' element={<SearchPage setVideoId={setVideoId} setChannelId={setChannelId} searchValue={searchValue} setSearchValue={setSearchValue} APIKey={APIKey}/>}/>
-          <Route path='/history' element={<History APIKey={APIKey} history={history} sbCategory={sbCategory} setSbCategory={setSbCategory}/>}/>
+          <Route path='/category/history' element={<History APIKey={APIKey} history={history} sbCategory={sbCategory} setSbCategory={setSbCategory}/>}/>
         </Routes>
       </BrowserRouter>
     </div>

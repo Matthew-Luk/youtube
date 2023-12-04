@@ -44,11 +44,10 @@ const SingleVideo = (props) => {
         `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=20&key=${APIKey}`
     ]
     useEffect(() => {
-        setHistory([videoId, ...history])
+        setHistory([...history, videoId])
         axios.all(urls.map((url) => axios.get(url)))
         .then((result) => {
             // [0]
-            console.log(result)
             let video = result[0].data.items[0]
             setVideoTitle(parseHtmlEntities(video.snippet.title))
             setVideoChannel(video.snippet.channelTitle)
