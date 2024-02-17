@@ -19,7 +19,7 @@ function Home(props) {
         <div className="home">
             <Navbar setSearchValue={setSearchValue}/>
             <Sidebar setSbCategory={setSbCategory}/>
-            <Main setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey}/>
+            <Main setChannelId={setChannelId} setVideoId={setVideoId} APIKey={APIKey} setSearchValue={setSearchValue}/>
         </div>
     );
 }
